@@ -6,6 +6,18 @@
   ],
   "plugins": [
     "@babel/proposal-class-properties",
-    "@babel/proposal-object-rest-spread"
+    "@babel/proposal-object-rest-spread",
+    [
+      "babel-plugin-styled-components",
+      {
+        "displayName": false,
+        "ssr": false,
+        "fileName": false,
+        "minify": false,
+        "transpileTemplateLiterals": false,
+        "pure": false // dead code elemination
+        // TODO: adopt for production
+      }
+    ]
   ]
 }
