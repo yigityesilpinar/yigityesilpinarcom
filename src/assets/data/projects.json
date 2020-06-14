@@ -1,0 +1,56 @@
+[
+  {
+    "id": "yigit_yesilpinar",
+    "name": "Yigityesilpinar.com",
+    "description": "Personal Web Site, Full Stack (MERN) JS Responsive Web Application",
+    "techs": "React, Redux, Webpack, LESS and Bootstrap for Front End, Express and MongoDB for Back End",
+    "for": "Self",
+    "status": "Under Development",
+    "link": "http://www.yigityesilpinar.com"
+  },
+  {
+    "id": "badges-portfolio",
+    "name": "BadgesPortfolio",
+    "description": "A portfolio for language students with Mozilla OpenBadges integration",
+    "techs": "Php, MySql, JQuery/Ajax, HTML5, CSS(Bootstrap, SASS), Git",
+    "for": "My Language skills S.L.U.",
+    "status": "Deployed",
+    "link": "https://github.com/yigityesilpinar/BadgesPortfolio"
+  },
+  {
+    "id": "carpooling",
+    "name": "Carpooling Senior Project",
+    "description": "Application for Intercity and Intracity Carpooling using Google Maps API",
+    "techs": "SQL Server, ASP.NET, MVVM (KnockoutJS), Entity Framework, RequireJs, C#, T-SQL, IIS",
+    "for": "Ankara University",
+    "status": "Deployed",
+    "link": "https://github.com/yigityesilpinar/Web-Based-Application-of-Carpooling"
+  },
+  {
+    "id": "kainos-solution",
+    "name": "StockExchange",
+    "description": "Stock Exchange App solution for Kainos",
+    "techs": "Asp.net, MVC, EntityFramework, Bootstrap, Jquery, RequireJs,CanvasJs",
+    "for": "Kainos",
+    "status": "Deployed",
+    "link": "https://github.com/yigityesilpinar/yigityesilpinarsolution"
+  },
+  {
+    "id": "polish-namedays",
+    "name": "Polish Namedays App",
+    "description": "Windows Store Namedays application using Outlook contacts, can push notifications daily, option to have live tiles, save reminders to Calendar, send mail by using Outlook",
+    "techs": "Universal Windows Platform (C#, XAML), ",
+    "for": "Self",
+    "status": "Under Development",
+    "link": "https://github.com/yigityesilpinar/Polish-Namedays-Windows-Store-Application"
+  },
+  {
+    "id": "wp-solution",
+    "name": "Wirtualna Polska Solution",
+    "description": "Async module loading, jQuery like css selector.",
+    "techs": "Pure JS, ES5",
+    "for": "Wirtualna Polska",
+    "status": "Deployed",
+    "link": "https://github.com/yigityesilpinar/SolutionWirtualnaPolska"
+  }
+]

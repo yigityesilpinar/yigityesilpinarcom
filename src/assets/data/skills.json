@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "name": "React",
+    "percent": 90,
+    "highlight": "With brand new hooks",
+    "version": "> 16.8"
+  },
+  {
+    "id": 2,
+    "name": "Typescript",
+    "percent": 90,
+    "highlight": "Loving the help of Typescript",
+    "version": "> 3.4"
+  },
+  {
+    "id": 3,
+    "name": "Styled Components",
+    "percent": 90,
+    "highlight": "Most convenient way to style",
+    "version": "> 4"
+  },
+  {
+    "id": 4,
+    "name": "Mobx",
+    "percent": 85,
+    "highlight": "",
+    "version": "~ 4.9"
+  },
+  {
+    "id": 5,
+    "name": "Redux",
+    "percent": 85,
+    "highlight": "",
+    "version": ""
+  },
+  {
+    "id": 6,
+    "name": "Webpack",
+    "percent": 80,
+    "highlight": "",
+    "version": ">4"
+  },
+  {
+    "id": 7,
+    "name": "Jest",
+    "percent": 85,
+    "highlight": "Unit tests!",
+    "version": ""
+  },
+  {
+    "id": 8,
+    "name": "Cypress",
+    "percent": 85,
+    "highlight": "E2E tests!",
+    "version": ""
+  },
+  {
+    "id": 9,
+    "name": "Scrum",
+    "percent": 90,
+    "highlight": "",
+    "version": ""
+  },
+  {
+    "id": 10,
+    "name": "Node.js",
+    "percent": 75,
+    "highlight": "",
+    "version": ""
+  },
+  {
+    "id": 11,
+    "name": "Grafana/Kibana",
+    "percent": 75,
+    "highlight": "",
+    "version": ""
+  },
+  {
+    "id": 12,
+    "name": "Docker",
+    "percent": 75,
+    "highlight": "",
+    "version": ""
+  },
+  {
+    "id": 13,
+    "name": "CI/CD",
+    "percent": 85,
+    "highlight": "",
+    "version": ""
+  },
+  {
+    "id": 14,
+    "name": "Python",
+    "percent": 65,
+    "highlight": "",
+    "version": ""
+  }
+]

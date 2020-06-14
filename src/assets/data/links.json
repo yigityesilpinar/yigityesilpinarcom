@@ -1,0 +1,30 @@
+[
+  {
+    "id": 3,
+    "name": "LinkedIn",
+    "type": "professional",
+    "slug": "linkedin",
+    "link": "https://www.linkedin.com/in/yigit-yesilpinar-b031a071"
+  },
+  {
+    "id": 2,
+    "name": "Github",
+    "type": "professional",
+    "slug": "github",
+    "link": "https://github.com/yigityesilpinar"
+  },
+  {
+    "id": 4,
+    "name": "Gitlab",
+    "type": "professional",
+    "slug": "gitlab",
+    "link": "https://gitlab.com/yigityesilpinar"
+  },
+  {
+    "id": 1,
+    "name": "Facebook",
+    "type": "social",
+    "slug": "facebook",
+    "link": "https://www.facebook.com/yigityesilpinar"
+  }
+]
