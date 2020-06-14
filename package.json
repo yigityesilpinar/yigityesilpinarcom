@@ -6,8 +6,9 @@
   "author": "yigityesilpinar@gmail.com",
   "main": "index.js",
   "scripts": {
+    "prod": "cross-env NODE_ENV=production ts-node src/server/app.ts ",
     "dev": "cross-env NODE_ENV=development nodemon",
-    "webpack": "cross-env TS_NODE_PROJECT=\"tsconfig.json\" webpack-dev-server --config='config/webpack/client.ts'"
+    "build": "cross-env NODE_ENV=production TS_NODE_PROJECT=\"tsconfig.json\" webpack --config='config/webpack/client.ts'"
   },
   "dependencies": {
     "@babel/runtime": "7.10.2",

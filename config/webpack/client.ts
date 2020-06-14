@@ -10,10 +10,15 @@ import { OUTPUT_DIR, SRC_PATH, PROJECT_ROOT_DIR } from "../paths";
 const mode =
   process.env.NODE_ENV === "development" ? "development" : "production";
 
+const isDevMode = mode === "development";
+
 const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
-  entry: ["webpack-hot-middleware/client", path.resolve(SRC_PATH, "index.tsx")],
+  entry: [
+    isDevMode && "webpack-hot-middleware/client",
+    path.resolve(SRC_PATH, "index.tsx"),
+  ].filter(Boolean),
   mode,
-  devtool: "source-map",
+  ...(isDevMode ? { devtool: "source-map" } : {}),
   module: {
     rules: [
       {
@@ -47,11 +52,6 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
     modules: ["node_modules"],
     alias: {
       src: path.resolve(PROJECT_ROOT_DIR, "src"),
-      "styled-components": path.resolve(
-        PROJECT_ROOT_DIR,
-        "node_modules",
-        "styled-components"
-      ),
     },
   },
   output: {
@@ -68,12 +68,12 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
     hotOnly: true,
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    isDevMode && new webpack.HotModuleReplacementPlugin(),
     new ForkTsCheckerWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: path.resolve(SRC_PATH, "index.html"),
     }),
-  ],
+  ].filter(Boolean),
 };
 
 export default clientConfig;
