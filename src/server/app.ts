@@ -1,14 +1,14 @@
 import express from "express";
-import webpack from "webpack";
-import webpackDevMiddlewareFn from "webpack-dev-middleware";
-import webpackHotMiddlewareFn from "webpack-hot-middleware";
-import clientConfig from "../../config/webpack/client";
 
 const isProd = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 8080;
 const app = express();
 
 if (!isProd) {
+  const webpack = require("webpack");
+  const webpackDevMiddlewareFn = require("webpack-dev-middleware");
+  const webpackHotMiddlewareFn = require("webpack-hot-middleware");
+  const clientConfig = require("../../config/webpack/client").default;
   const compiler = webpack(clientConfig);
   const webpackDevMiddleware = webpackDevMiddlewareFn(compiler, {
     publicPath: clientConfig.output.publicPath,
