@@ -6,10 +6,10 @@
   "author": "yigityesilpinar@gmail.com",
   "main": "index.js",
   "scripts": {
-    "prod": "cross-env NODE_ENV=production ts-node src/server/app.ts",
-    "heroku-postbuild": "npm run build",
+    "build": "cross-env NODE_ENV=production TS_NODE_PROJECT=\"tsconfig.json\" webpack --config='config/webpack/client.ts'",
     "dev": "cross-env NODE_ENV=development nodemon",
-    "build": "cross-env NODE_ENV=production TS_NODE_PROJECT=\"tsconfig.json\" webpack --config='config/webpack/client.ts'"
+    "heroku-postbuild": "npm run build",
+    "prod": "cross-env NODE_ENV=production ts-node src/server/app.ts"
   },
   "dependencies": {
     "@babel/runtime": "7.10.2",
@@ -19,7 +19,10 @@
     "react-dom": "16.13.1",
     "react-is": "16.13.1",
     "styled-components": "5.1.1",
-    "webpack-dev-middleware": "3.7.2"
+    "ts-node": "8.10.2",
+    "webpack": "4.43.0",
+    "webpack-dev-middleware": "3.7.2",
+    "webpack-hot-middleware": "2.25.0"
   },
   "devDependencies": {
     "@babel/cli": "7.10.1",
@@ -55,12 +58,9 @@
     "source-map-loader": "1.0.0",
     "style-loader": "1.2.1",
     "ts-loader": "7.0.5",
-    "ts-node": "8.10.2",
     "typescript": "3.9.5",
-    "webpack": "4.43.0",
     "webpack-cli": "3.3.11",
     "webpack-dev-server": "3.11.0",
-    "webpack-hot-middleware": "2.25.0",
     "webpack-node-externals": "1.7.2"
   },
   "engines": {
