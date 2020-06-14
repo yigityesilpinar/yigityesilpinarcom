@@ -3,8 +3,6 @@ import webpackDevServer from "webpack-dev-server";
 import HTMLWebpackPlugin from "html-webpack-plugin";
 import path from "path";
 
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-
 import { OUTPUT_DIR, SRC_PATH, PROJECT_ROOT_DIR } from "../paths";
 
 const mode =
@@ -27,13 +25,6 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
         use: [
           {
             loader: "babel-loader",
-          },
-          {
-            loader: "ts-loader",
-            options: {
-              // While type check is done in separate process, thanks to ForkTsCheckerWebpackPlugin plugin.
-              transpileOnly: true,
-            },
           },
         ],
       },
@@ -69,7 +60,6 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
   },
   plugins: [
     isDevMode && new webpack.HotModuleReplacementPlugin(),
-    new ForkTsCheckerWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: path.resolve(SRC_PATH, "index.html"),
     }),

@@ -4,8 +4,9 @@
 
 # TODOS
 
-- lint
+- lint, stylelint https://styled-components.com/docs/tooling
 - ssr
+- retry react-hot-loader or react-fast-refresh
 - unit integration e2e
 - cv generator
 - sentry
