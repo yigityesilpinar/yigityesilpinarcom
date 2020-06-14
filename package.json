@@ -6,7 +6,8 @@
   "author": "yigityesilpinar@gmail.com",
   "main": "index.js",
   "scripts": {
-    "prod": "cross-env NODE_ENV=production ts-node src/server/app.ts ",
+    "prod": "cross-env NODE_ENV=production ts-node src/server/app.ts",
+    "heroku-postbuild": "npm run build",
     "dev": "cross-env NODE_ENV=development nodemon",
     "build": "cross-env NODE_ENV=production TS_NODE_PROJECT=\"tsconfig.json\" webpack --config='config/webpack/client.ts'"
   },
