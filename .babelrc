@@ -12,7 +12,7 @@
           "styled-components",
           {
             "displayName": true,
-            "ssr": false,
+            "ssr": true,
             "fileName": false,
             "minify": false,
             "transpileTemplateLiterals": false,

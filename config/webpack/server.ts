@@ -1,28 +1,49 @@
-import path from "path";
 import webpack from "webpack";
-import nodeExternals from "webpack-node-externals";
+import path from "path";
 
-import { OUTPUT_DIR, SERVER_ENTRY_PATH, PROJECT_ROOT_DIR } from "../paths";
+const nodeExternals = require("webpack-node-externals");
+
+import { SRC_PATH, PROJECT_ROOT_DIR, SERVER_BUILD_DIR } from "../paths";
 
 const mode =
   process.env.NODE_ENV === "development" ? "development" : "production";
 
-const serverConfig: webpack.Configuration = {
-  entry: SERVER_ENTRY_PATH,
-  mode,
-  target: "node",
-  externals: [nodeExternals()],
-  output: {
-    path: path.join(OUTPUT_DIR, "server"),
-    filename: "index.js",
-  },
+const isDevMode = mode === "development";
 
+const serverConfig: webpack.Configuration = {
+  name: "server",
+  entry: [
+    isDevMode
+      ? path.resolve(SRC_PATH, "server/render.tsx")
+      : path.resolve(SRC_PATH, "server/index.ts"),
+  ],
+  target: "node",
+  externals: nodeExternals(),
+  mode,
+  ...(isDevMode ? { devtool: "source-map" } : {}),
+  output: {
+    path: SERVER_BUILD_DIR,
+    filename: "server.js",
+    ...(isDevMode ? { libraryTarget: "commonjs2" } : {}),
+  },
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/,
+        test: /\.(t|j)sx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: "babel-loader",
+        use: [
+          {
+            loader: "babel-loader",
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.html$/,
+        use: [{ loader: "html-loader" }],
       },
     ],
   },
@@ -33,6 +54,13 @@ const serverConfig: webpack.Configuration = {
       src: path.resolve(PROJECT_ROOT_DIR, "src"),
     },
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify(mode),
+      },
+    }),
+  ],
 };
 
 export default serverConfig;

@@ -1,9 +1,7 @@
 import webpack from "webpack";
 import webpackDevServer from "webpack-dev-server";
-import HTMLWebpackPlugin from "html-webpack-plugin";
 import path from "path";
 
-// const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
@@ -16,6 +14,7 @@ const mode =
 const isDevMode = mode === "development";
 
 const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
+  name: "client",
   entry: [
     isDevMode && "webpack-hot-middleware/client",
     path.resolve(SRC_PATH, "index.tsx"),
@@ -53,7 +52,7 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
   output: {
     path: OUTPUT_DIR,
     publicPath: "/",
-    filename: "bundle.js",
+    filename: "[name]-bundle.js",
   },
   ...(isDevMode
     ? {
@@ -69,9 +68,6 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
     : {}),
   plugins: [
     isDevMode && new webpack.HotModuleReplacementPlugin(),
-    new HTMLWebpackPlugin({
-      template: path.resolve(SRC_PATH, "index.html"),
-    }),
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(mode),
@@ -81,22 +77,17 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
     !isDevMode && new BrotliPlugin(),
     !isDevMode && new MinifyPlugin(),
   ].filter(Boolean),
-  ...(!isDevMode
-    ? {
-        optimization: {
-          // minimizer: [new UglifyJsPlugin()],  // does not support es6 (if babel env target is set e.g only chrome)
-          splitChunks: {
-            cacheGroups: {
-              commons: {
-                test: /[\\/]node_modules[\\/]/,
-                name: "vendors",
-                chunks: "all",
-              },
-            },
-          },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
         },
-      }
-    : {}),
+      },
+    },
+  },
 };
 
 export default clientConfig;
