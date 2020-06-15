@@ -9,7 +9,8 @@
     "analyze": "cross-env NODE_ENV=production TS_NODE_PROJECT=\"tsconfig.json\" webpack -p --config='config/webpack/client.ts' --profile --json > bundle_stats.json && webpack-bundle-analyzer bundle_stats.json",
     "build": "cross-env NODE_ENV=production TS_NODE_PROJECT=\"tsconfig.json\" webpack -p --config='config/webpack/client.ts' ",
     "dev": "cross-env NODE_ENV=development nodemon",
-    "prod": "cross-env NODE_ENV=production ts-node src/server/app.ts"
+    "prod": "cross-env NODE_ENV=production ts-node src/server/app.ts",
+    "type:check": "tsc --noEmit"
   },
   "dependencies": {
     "@babel/runtime": "7.10.2",

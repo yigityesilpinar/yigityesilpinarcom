@@ -6,9 +6,12 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "esnext",
     "jsx": "react",
     "allowJs": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "strict": true,
     "lib": ["es5", "es6", "DOM", "ESNext.Array"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -16,6 +19,5 @@
     "paths": {
       "src": ["src/*"]
     }
-  },
-  "exclude": ["node_modules"]
+  }
 }

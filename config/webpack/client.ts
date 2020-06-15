@@ -19,7 +19,7 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
   entry: [
     isDevMode && "webpack-hot-middleware/client",
     path.resolve(SRC_PATH, "index.tsx"),
-  ].filter(Boolean),
+  ].filter(Boolean) as string[],
   mode,
   ...(isDevMode ? { devtool: "source-map" } : {}),
   module: {
