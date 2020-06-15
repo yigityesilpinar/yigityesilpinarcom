@@ -1,13 +1,5 @@
 import express from "express";
 
-import webpack from "webpack";
-import webpackDevMiddlewareFn from "webpack-dev-middleware";
-import webpackHotMiddlewareFn from "webpack-hot-middleware";
-import webpackHotServerMiddlewareFn from "webpack-hot-server-middleware";
-
-import clientConfig from "../../config/webpack/client";
-import serverConfig from "../../config/webpack/server";
-
 const expressStaticGzip = require("express-static-gzip");
 
 const isProd = process.env.NODE_ENV === "production";
@@ -15,6 +7,12 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 if (!isProd) {
+  const webpack = require("webpack");
+  const webpackDevMiddlewareFn = require("webpack-dev-middleware");
+  const webpackHotMiddlewareFn = require("webpack-hot-middleware");
+  const webpackHotServerMiddlewareFn = require("webpack-hot-server-middleware");
+  const clientConfig = require("../../config/webpack/client").default;
+  const serverConfig = require("../../config/webpack/server").default;
   const compiler = webpack([clientConfig, serverConfig]);
   const [clientCompiler, _serverCompiler] = compiler.compilers;
   const webpackDevMiddleware = webpackDevMiddlewareFn(compiler, {
