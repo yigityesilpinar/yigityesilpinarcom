@@ -1,0 +1,6 @@
+{
+  "eslint.alwaysShowStatus": true,
+  "eslint.options": { "configFile": ".eslintrc.js" },
+  "eslint.enable": true,
+  "eslint.nodePath": "./node_modules/eslint"
+}

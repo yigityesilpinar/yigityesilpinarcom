@@ -1,30 +1,30 @@
-import webpack from "webpack";
-import path from "path";
+import webpack from 'webpack'
+import path from 'path'
 
-const nodeExternals = require("webpack-node-externals");
+const nodeExternals = require('webpack-node-externals')
 
-import { SRC_PATH, PROJECT_ROOT_DIR, SERVER_BUILD_DIR } from "../paths";
+import { SRC_PATH, PROJECT_ROOT_DIR, SERVER_BUILD_DIR } from '../paths'
 
 const mode =
-  process.env.NODE_ENV === "development" ? "development" : "production";
+  process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
-const isDevMode = mode === "development";
+const isDevMode = mode === 'development'
 
 const serverConfig: webpack.Configuration = {
-  name: "server",
+  name: 'server',
   entry: [
     isDevMode
-      ? path.resolve(SRC_PATH, "server/render.tsx")
-      : path.resolve(SRC_PATH, "server/index.ts"),
+      ? path.resolve(SRC_PATH, 'server/render.tsx')
+      : path.resolve(SRC_PATH, 'server/index.ts'),
   ],
-  target: "node",
+  target: 'node',
   externals: nodeExternals(),
   mode,
-  ...(isDevMode ? { devtool: "source-map" } : {}),
+  ...(isDevMode ? { devtool: 'source-map' } : {}),
   output: {
     path: SERVER_BUILD_DIR,
-    filename: "server.js",
-    ...(isDevMode ? { libraryTarget: "commonjs2" } : {}),
+    filename: 'server.js',
+    ...(isDevMode ? { libraryTarget: 'commonjs2' } : {}),
   },
   module: {
     rules: [
@@ -33,32 +33,32 @@ const serverConfig: webpack.Configuration = {
         exclude: /(node_modules|bower_components)/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
           },
         ],
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.html$/,
-        use: [{ loader: "html-loader" }],
+        use: [{ loader: 'html-loader' }],
       },
     ],
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
-    modules: ["node_modules"],
+    extensions: ['.ts', '.tsx', '.js'],
+    modules: ['node_modules'],
     alias: {
-      src: path.resolve(PROJECT_ROOT_DIR, "src"),
+      src: path.resolve(PROJECT_ROOT_DIR, 'src'),
     },
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(mode),
+      'process.env.NODE_ENV': JSON.stringify(mode),
     }),
   ],
-};
+}
 
-export default serverConfig;
+export default serverConfig

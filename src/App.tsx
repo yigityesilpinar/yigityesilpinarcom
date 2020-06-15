@@ -1,12 +1,10 @@
-import * as React from "react";
-import Home from "src/views/Home";
+import * as React from 'react'
+import Home from 'src/views/Home'
 
-const App: React.FC<{}> = () => {
-  return (
+const App: React.FC<unknown> = () => (
     <div className="App">
       <Home />
     </div>
-  );
-};
+  )
 
-export default App;
+export default App

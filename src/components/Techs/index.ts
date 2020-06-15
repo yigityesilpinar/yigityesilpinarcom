@@ -1,1 +1,1 @@
-export { default } from "./Techs";
+export { default } from './Techs'

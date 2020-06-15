@@ -1,7 +1,7 @@
-import React from "react";
-import { renderToString } from "react-dom/server";
-import ClientApp from "../App";
-import { Request, Response } from "express";
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import ClientApp from '../App'
+import { Request, Response } from 'express'
 
 const render = () => (req: Request, res: Response) => {
   res.send(`
@@ -24,7 +24,7 @@ const render = () => (req: Request, res: Response) => {
       <script src="main-bundle.js"></script>
     </body>
   </html>
-`);
-};
+`)
+}
 
-export default render;
+export default render
