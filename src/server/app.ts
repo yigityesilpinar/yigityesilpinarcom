@@ -1,5 +1,7 @@
 import express from "express";
 
+const expressStaticGzip = require("express-static-gzip");
+
 const isProd = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 8080;
 const app = express();
@@ -18,8 +20,15 @@ if (!isProd) {
   app.use(webpackDevMiddleware);
   // should be berfore static after dev middleware, in clientConfig needs devServer hot true option
   app.use(webpackHotMiddleware);
+  app.use(express.static("dist"));
+} else {
+  app.use(
+    expressStaticGzip("dist", {
+      enableBrotli: true,
+      orderPreference: ["br"],
+    })
+  );
 }
-app.use(express.static("dist"));
 
 app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);

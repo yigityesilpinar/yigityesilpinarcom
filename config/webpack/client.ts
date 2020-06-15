@@ -3,6 +3,11 @@ import webpackDevServer from "webpack-dev-server";
 import HTMLWebpackPlugin from "html-webpack-plugin";
 import path from "path";
 
+// const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MinifyPlugin = require("babel-minify-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+const BrotliPlugin = require("brotli-webpack-plugin");
+
 import { OUTPUT_DIR, SRC_PATH, PROJECT_ROOT_DIR } from "../paths";
 
 const mode =
@@ -50,20 +55,48 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
     publicPath: "/",
     filename: "bundle.js",
   },
-  devServer: {
-    contentBase: OUTPUT_DIR,
-    overlay: true,
-    stats: { colors: true },
-    publicPath: "/",
-    hot: true,
-    hotOnly: true,
-  },
+  ...(isDevMode
+    ? {
+        devServer: {
+          contentBase: OUTPUT_DIR,
+          overlay: true,
+          stats: { colors: true },
+          publicPath: "/",
+          hot: true,
+          hotOnly: true,
+        },
+      }
+    : {}),
   plugins: [
     isDevMode && new webpack.HotModuleReplacementPlugin(),
     new HTMLWebpackPlugin({
       template: path.resolve(SRC_PATH, "index.html"),
     }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify(mode),
+      },
+    }),
+    !isDevMode && new CompressionPlugin(),
+    !isDevMode && new BrotliPlugin(),
+    !isDevMode && new MinifyPlugin(),
   ].filter(Boolean),
+  ...(!isDevMode
+    ? {
+        optimization: {
+          // minimizer: [new UglifyJsPlugin()],  // does not support es6 (if babel env target is set e.g only chrome)
+          splitChunks: {
+            cacheGroups: {
+              commons: {
+                test: /[\\/]node_modules[\\/]/,
+                name: "vendors",
+                chunks: "all",
+              },
+            },
+          },
+        },
+      }
+    : {}),
 };
 
 export default clientConfig;
