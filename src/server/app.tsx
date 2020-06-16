@@ -6,8 +6,6 @@ const isProd = process.env.NODE_ENV === 'production'
 const port = process.env.PORT || 8080
 const app = express()
 
-app.use(require('body-parser'))
-
 if (!isProd) {
   const webpack = require('webpack')
   const webpackDevMiddlewareFn = require('webpack-dev-middleware')
