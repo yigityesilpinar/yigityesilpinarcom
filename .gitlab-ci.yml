@@ -1,4 +1,4 @@
-image: node:12-alpine
+image: atlassianlabs/docker-node-jdk-chrome-firefox
 
 variables:
   PROJECT_NAME: 'yigityesilpinarcom'
@@ -35,12 +35,16 @@ build:
     <<: *global_cache
     # override the policy
     policy: pull
+  artifacts:
+    untracked: true
   stage: build
   script:
     - npm run build
 
 deploy:
   stage: deploy
+  dependencies:
+    - build
   script:
     - docker build -t $DOCKER_IMAGE .
     - docker push $DOCKER_IMAGE
