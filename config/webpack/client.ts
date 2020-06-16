@@ -15,10 +15,13 @@ const isDevMode = mode === 'development'
 
 const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
   name: 'client',
-  entry: [
-    isDevMode && 'webpack-hot-middleware/client',
-    path.resolve(SRC_PATH, 'index.tsx'),
-  ].filter(Boolean) as string[],
+  entry: {
+    vendors: ['react', 'react-dom', 'styled-components'],
+    main: [
+      isDevMode && 'webpack-hot-middleware/client',
+      path.resolve(SRC_PATH, 'index.tsx'),
+    ].filter(Boolean) as string[],
+  },
   mode,
   ...(isDevMode ? { devtool: 'source-map' } : {}),
   module: {
@@ -52,6 +55,7 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
   output: {
     path: OUTPUT_DIR,
     publicPath: '/',
+    chunkFilename: '[name]-bundle.js',
     filename: '[name]-bundle.js',
   },
   ...(isDevMode
@@ -79,9 +83,9 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
     splitChunks: {
       cacheGroups: {
         commons: {
-          test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          chunks: 'all',
+          chunks: 'initial',
+          minChunks: 2,
         },
       },
     },

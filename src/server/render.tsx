@@ -1,7 +1,9 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import ClientApp from '../App'
 import { Request, Response } from 'express'
+import { StaticRouter } from 'react-router'
+
+import Routes from '../routes'
 
 const render = () => (req: Request, res: Response) => {
   res.send(`
@@ -16,7 +18,11 @@ const render = () => (req: Request, res: Response) => {
       <title>Yigit Yesilpinar Personal Page</title>
     </head>
     <body>
-      <div id="root">${renderToString(<ClientApp />)}</div>
+      <div id="root">${renderToString(
+        <StaticRouter location={req.url}>
+          <Routes />
+        </StaticRouter>
+      )}</div>
       <noscript>
         You need to enable JavaScript to run this app.
       </noscript>

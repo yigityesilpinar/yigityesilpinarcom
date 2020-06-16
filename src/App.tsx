@@ -1,10 +1,12 @@
-import * as React from 'react'
-import Home from 'src/views/Home'
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+
+import AppRoutes from 'src/routes'
 
 const App: React.FC<unknown> = () => (
-    <div className="App">
-      <Home />
-    </div>
-  )
+  <Router>
+    <AppRoutes />
+  </Router>
+)
 
 export default App
