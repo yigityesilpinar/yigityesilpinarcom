@@ -1,4 +1,5 @@
 import express from 'express'
+import * as Sentry from '@sentry/node'
 
 const expressStaticGzip = require('express-static-gzip')
 
@@ -26,6 +27,11 @@ if (!isProd) {
   app.use(webpackHotMiddleware)
   app.use(webpackHotServerMiddlewareFn(compiler))
 } else {
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+  })
+  app.use(Sentry.Handlers.requestHandler())
+  app.use(Sentry.Handlers.errorHandler())
   app.use(
     expressStaticGzip('dist', {
       enableBrotli: true,
@@ -33,7 +39,6 @@ if (!isProd) {
     })
   )
   const render = require('./render').default
-
   app.get('*', render())
 }
 

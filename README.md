@@ -6,11 +6,12 @@
 - ssr
 - lint, stylelint
 - DockerFile
+- Ci/cd (gitlab ci)
+- dockerhub push
+- Sentry
 
 # TODOS
 
-- Ci/cd (gitlab ci)
-- dockerhub push
 - formidable
 - md editor
 - retry react-hot-loader or react-fast-refresh
@@ -36,5 +37,6 @@ docker build -t ${PROJECT_NAME}:local .
 # -d option for deamon mode
 # -p is host:container
 docker run -p 8080:8080 --name yigityesilpinarcomcontainer yigityesilpinarcom:local
+# docker run  -p 8080:8080 --name yigityesilpinarcomcontainer yigityesilpinar/yigityesilpinarcom:latest
 ```
 

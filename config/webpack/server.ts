@@ -57,6 +57,7 @@ const serverConfig: webpack.Configuration = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(mode),
+      'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
     }),
   ],
 }
