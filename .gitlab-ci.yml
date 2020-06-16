@@ -44,7 +44,10 @@ build:
     # override the policy
     policy: pull
   artifacts:
-    untracked: true
+    paths:
+      - dist/
+      - build/
+    expire_in: 30 mins
   stage: build
   script:
     - npm run build
