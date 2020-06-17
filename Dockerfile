@@ -17,7 +17,6 @@ RUN npm install
 # COPY .babelrc tsconfig.json ./
 # RUN npm run build
 
-COPY ./dist ./dist
 COPY ./build ./build
 
 EXPOSE ${PORT}

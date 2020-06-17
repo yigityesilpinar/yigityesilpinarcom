@@ -27,19 +27,21 @@ if (!isProd) {
   app.use(webpackHotMiddleware)
   app.use(webpackHotServerMiddlewareFn(compiler))
 } else {
+  const webpackStats = require('../../build/stats.json')
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
   })
   app.use(Sentry.Handlers.requestHandler())
   app.use(Sentry.Handlers.errorHandler())
   app.use(
-    expressStaticGzip('dist', {
+    expressStaticGzip('build', {
       enableBrotli: true,
       orderPreference: ['br'],
     })
   )
   const render = require('./render').default
-  app.get('*', render())
+  //! this requires server build to be after client (not paralel)
+  app.get('*', render(webpackStats))
 }
 
 app.listen(port, () => {

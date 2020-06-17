@@ -45,7 +45,6 @@ build:
     policy: pull
   artifacts:
     paths:
-      - dist/
       - build/
     expire_in: 30 mins
   stage: build

@@ -1,9 +1,11 @@
 import webpack from 'webpack'
 import path from 'path'
 
-const nodeExternals = require('webpack-node-externals')
+//! crucial for bundling logic
+//! e.g react-universal-component ssr is not working without
+import externals from './externals'
 
-import { SRC_PATH, PROJECT_ROOT_DIR, SERVER_BUILD_DIR } from '../paths'
+import { SRC_PATH, PROJECT_ROOT_DIR, OUTPUT_DIR } from '../paths'
 
 const mode =
   process.env.NODE_ENV === 'development' ? 'development' : 'production'
@@ -18,11 +20,11 @@ const serverConfig: webpack.Configuration = {
       : path.resolve(SRC_PATH, 'server/index.ts'),
   ],
   target: 'node',
-  externals: nodeExternals(),
+  externals,
   mode,
   ...(isDevMode ? { devtool: 'source-map' } : {}),
   output: {
-    path: SERVER_BUILD_DIR,
+    path: OUTPUT_DIR,
     filename: 'server.js',
     ...(isDevMode ? { libraryTarget: 'commonjs2' } : {}),
   },
@@ -58,6 +60,11 @@ const serverConfig: webpack.Configuration = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(mode),
       'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
+    }),
+    //! Critical to keep server bundle chunk together
+    //! e.g react-universal-component ssr is not working without
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
     }),
   ],
 }

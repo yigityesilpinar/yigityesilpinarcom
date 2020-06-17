@@ -8,6 +8,8 @@ const BrotliPlugin = require('brotli-webpack-plugin')
 
 import { OUTPUT_DIR, SRC_PATH, PROJECT_ROOT_DIR } from '../paths'
 
+const publicPath = '/'
+
 const mode =
   process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
@@ -54,7 +56,7 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
   },
   output: {
     path: OUTPUT_DIR,
-    publicPath: '/',
+    publicPath,
     chunkFilename: '[name]-bundle.js',
     filename: '[name]-bundle.js',
   },
@@ -64,7 +66,7 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
           contentBase: OUTPUT_DIR,
           overlay: true,
           stats: { colors: true },
-          publicPath: '/',
+          publicPath,
           hot: true,
           hotOnly: true,
         },
@@ -90,6 +92,8 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
       },
     },
   },
+  // ! needed for webpack-flush-chunks, making server bundle heavy, a better solution would be nice
+  stats: 'verbose',
 }
 
 export default clientConfig
