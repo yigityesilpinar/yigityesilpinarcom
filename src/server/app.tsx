@@ -27,7 +27,6 @@ if (!isProd) {
   app.use(webpackHotMiddleware)
   app.use(webpackHotServerMiddlewareFn(compiler))
 } else {
-  const webpackStats = require('../../build/stats.json')
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
   })
@@ -40,8 +39,7 @@ if (!isProd) {
     })
   )
   const render = require('./render').default
-  //! this requires server build to be after client (not paralel)
-  app.get('*', render(webpackStats))
+  app.get('*', render())
 }
 
 app.listen(port, () => {

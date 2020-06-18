@@ -1,6 +1,6 @@
 {
   "watch": ["src/server", "config"],
-  "ext": "ts",
+  "ext": "tsx?",
   "ignore": ["src/**/*.spec.ts"],
-  "exec": "node --inspect -r ts-node/register ./src/server"
+  "exec": "NODE_ENV=development node --inspect -r ts-node/register ./src/server"
 }

@@ -5,6 +5,7 @@ import path from 'path'
 const MinifyPlugin = require('babel-minify-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const BrotliPlugin = require('brotli-webpack-plugin')
+const LoadablePlugin = require('@loadable/webpack-plugin')
 
 import { OUTPUT_DIR, SRC_PATH, PROJECT_ROOT_DIR } from '../paths'
 
@@ -80,6 +81,7 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
     !isDevMode && new CompressionPlugin(),
     !isDevMode && new BrotliPlugin(),
     !isDevMode && new MinifyPlugin(),
+    new LoadablePlugin({ writeToDisk: true }),
   ].filter(Boolean),
   optimization: {
     splitChunks: {
@@ -92,8 +94,6 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
       },
     },
   },
-  // ! needed for webpack-flush-chunks, making server bundle heavy, a better solution would be nice
-  stats: 'verbose',
 }
 
 export default clientConfig

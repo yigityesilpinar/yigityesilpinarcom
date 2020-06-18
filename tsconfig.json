@@ -17,6 +17,7 @@
     "esModuleInterop": true,
     "paths": {
       "src": ["src/*"]
-    }
+    },
+    "typeRoots": ["src/types", "node_modules/@types"]
   }
 }

@@ -1,9 +1,13 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { hydrate } from 'react-dom'
+import { loadableReady } from '@loadable/component'
 
 import App from './App'
 
-ReactDOM.hydrate(<App />, document.getElementById('root'))
+loadableReady(() => {
+  const root = document.getElementById('root')
+  hydrate(<App />, root)
+})
 
 // @ts-ignore
 if (module.hot) {

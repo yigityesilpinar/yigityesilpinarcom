@@ -1,10 +1,9 @@
 import webpack from 'webpack'
 import path from 'path'
 
-//! crucial for bundling logic
-//! e.g react-universal-component ssr is not working without
-import externals from './externals'
-
+// import externals from './externals'
+import nodeExternals from 'webpack-node-externals'
+const externals = nodeExternals()
 import { SRC_PATH, PROJECT_ROOT_DIR, OUTPUT_DIR } from '../paths'
 
 const mode =
@@ -60,6 +59,9 @@ const serverConfig: webpack.Configuration = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(mode),
       'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
+      'global.WEBPACK_STATS_PATH': JSON.stringify(
+        path.resolve(OUTPUT_DIR, 'loadable-stats.json')
+      ),
     }),
     //! Critical to keep server bundle chunk together
     //! e.g react-universal-component ssr is not working without

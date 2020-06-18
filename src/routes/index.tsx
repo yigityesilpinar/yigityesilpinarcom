@@ -1,11 +1,9 @@
 import React from 'react'
 import { Route, Link, Switch } from 'react-router-dom'
-import universal from 'react-universal-component'
-// import Home from 'src/routes/Home'
-// import Contact from 'src/routes/Contact'
+import loadable from '@loadable/component'
 
-const Home = universal((props) => import('src/routes/Home'))
-const Contact = universal((props) => import('src/routes/Contact'))
+const Home = loadable(() => import('src/routes/Home'))
+const Contact = loadable(() => import('src/routes/Contact'))
 
 const AppRoutes: React.FC<unknown> = () => (
   <>

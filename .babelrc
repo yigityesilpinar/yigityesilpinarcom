@@ -4,7 +4,7 @@
     "@babel/preset-typescript",
     "@babel/preset-react"
   ],
-"env": {
+  "env": {
     // only enable it when process.env.NODE_ENV is 'development' or undefined
     "development": {
       "plugins": [
@@ -41,6 +41,6 @@
     "@babel/plugin-transform-runtime",
     "@babel/proposal-class-properties",
     "@babel/proposal-object-rest-spread",
-    "universal-import"
+    "@loadable/babel-plugin"
   ]
 }
