@@ -28,7 +28,7 @@ stages:
   - build
   - deploy
 
-pullNode:
+.pullNode:
   cache:
     # inherit all global cache settings
     <<: *global_cache
@@ -46,19 +46,19 @@ install:
     - npm install
 
 lint:type:check:
-  extends: pullNode
+  extends: .pullNode
   stage: lint
   script:
     - npm run type:check
 
 lint:lint:
-  extends: pullNode
+  extends: .pullNode
   stage: lint
   script:
     - npm run lint
 
 build:
-  extends: pullNode
+  extends: .pullNode
   artifacts:
     paths:
       - build/
