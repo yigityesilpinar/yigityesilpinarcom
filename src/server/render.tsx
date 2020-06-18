@@ -4,13 +4,14 @@ import { ServerStyleSheet } from 'styled-components'
 import { ChunkExtractor } from '@loadable/server'
 import { Request, Response } from 'express'
 import { StaticRouter } from 'react-router'
+import { Stats } from 'webpack'
 
 import Routes from '../routes'
 import { waitAndRequireStatsFile } from './utils'
 
 const isDevMode = process.env.NODE_ENV === 'development'
 
-const render = () => async (req: Request, res: Response) => {
+const render = (stats: Stats) => async (req: Request, res: Response) => {
   const sheet = new ServerStyleSheet()
   let appStr = ''
   let styleTags = ''
@@ -21,10 +22,10 @@ const render = () => async (req: Request, res: Response) => {
   // `
 
   try {
-    // global.WEBPACK_STATS_PATH is replaced with absolute path on build time
-    const extractorOptions = await waitAndRequireStatsFile(
-      global.WEBPACK_STATS_PATH
-    )
+    // for DevMode global.WEBPACK_STATS_PATH is replaced with absolute path on build time
+    const extractorOptions = isDevMode
+      ? await waitAndRequireStatsFile(global.WEBPACK_STATS_PATH)
+      : { stats }
     const extractor = new ChunkExtractor(extractorOptions)
     // Wrap your application using "collectChunks"
     const jsx = extractor.collectChunks(

@@ -27,6 +27,7 @@ if (!isProd) {
   app.use(webpackHotMiddleware)
   app.use(webpackHotServerMiddlewareFn(compiler))
 } else {
+  // PRODUCTION
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
   })
@@ -39,7 +40,9 @@ if (!isProd) {
     })
   )
   const render = require('./render').default
-  app.get('*', render())
+  // for production read once at server start
+  const statsJSON = require('../../build/loadable-stats.json')
+  app.get('*', render(statsJSON))
 }
 
 app.listen(port, () => {
