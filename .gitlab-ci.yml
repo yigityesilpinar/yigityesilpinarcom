@@ -24,8 +24,16 @@ cache: &global_cache
 
 stages:
   - install
+  - lint
   - build
   - deploy
+
+pullNode:
+  cache:
+    # inherit all global cache settings
+    <<: *global_cache
+    # override the policy
+    policy: pull
 
 install:
   cache:
@@ -37,12 +45,20 @@ install:
   script:
     - npm install
 
+lint:type:check:
+  extends: pullNode
+  stage: lint
+  script:
+    - npm run type:check
+
+lint:lint:
+  extends: pullNode
+  stage: lint
+  script:
+    - npm run lint
+
 build:
-  cache:
-    # inherit all global cache settings
-    <<: *global_cache
-    # override the policy
-    policy: pull
+  extends: pullNode
   artifacts:
     paths:
       - build/
