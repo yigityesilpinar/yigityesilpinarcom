@@ -12,6 +12,7 @@ import { waitAndRequireStatsFile } from './utils'
 const isDevMode = process.env.NODE_ENV === 'development'
 
 const render = (stats: Stats) => async (req: Request, res: Response) => {
+  // styled components
   const sheet = new ServerStyleSheet()
   let appStr = ''
   let styleTags = ''
@@ -61,11 +62,12 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
     <head>
       <meta charset="UTF-8" />
       ${styleTags}
-      <meta
+    <meta
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
       <title>Yigit Yesilpinar Personal Page</title>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700;900&display=swap" rel="stylesheet">
     </head>
     <body>
       <div id="root">${appStr}</div>

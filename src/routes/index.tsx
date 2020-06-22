@@ -1,21 +1,21 @@
 import React from 'react'
-import { Route, Link, Switch } from 'react-router-dom'
-import loadable from '@loadable/component'
+import { Route, Switch } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+import defaultTheme from 'src/styles/theme'
 
-const Home = loadable(() => import('src/routes/Home'))
-const Contact = loadable(() => import('src/routes/Contact'))
+import Layout from 'src/layouts/Default'
+import appRoutes from 'src/routes/config'
 
 const AppRoutes: React.FC<unknown> = () => (
-  <>
-    <div>
-      <Link to="/">Home</Link>
-      <Link to="/contact">Contact</Link>
-    </div>
-    <Switch>
-      <Route path="/contact" exact component={Contact} />
-      <Route path="/" component={Home} />
-    </Switch>
-  </>
+  <ThemeProvider theme={defaultTheme}>
+    <Layout>
+      <Switch>
+        {appRoutes.map((routeProps, index) => (
+          <Route key={index} {...routeProps} />
+        ))}
+      </Switch>
+    </Layout>
+  </ThemeProvider>
 )
 
 export default AppRoutes
