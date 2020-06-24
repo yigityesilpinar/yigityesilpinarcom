@@ -39,9 +39,6 @@ stages:
 
 install:
   stage: install
-  # TODO: remove
-  only:
-    - test
   cache:
     # inherit all global cache settings
     <<: *global_cache
@@ -53,27 +50,18 @@ install:
 lint:type:check:
   stage: lint
   extends: .pullNode
-  # TODO: remove
-  only:
-    - test
   script:
     - npm run type:check
 
 lint:lint:
   stage: lint
   extends: .pullNode
-  # TODO: remove
-  only:
-    - test
   script:
     - npm run lint
 
 build:
   stage: build
   extends: .pullNode
-  # TODO: remove
-  only:
-    - test
   artifacts:
     paths:
       - build/
@@ -85,13 +73,10 @@ deploy:
   stage: deploy
   only:
     - master
-  # TODO: revert
-  # dependencies:
-  #   - build
+  dependencies:
+    - build
   script:
     # prepare auth for gcloud
-    - pwd 
-    - ls -la /
     - echo $GCLOUD_SERVICE_KEY > ./$GCLOUD_SECRETS_FILENAME
     - /google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ./$GCLOUD_SECRETS_FILENAME
     # build docker image
