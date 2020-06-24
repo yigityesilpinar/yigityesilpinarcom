@@ -74,6 +74,10 @@ build:
     - ssh-keyscan gitlab.com >> /root/.ssh/known_hosts
     - git commit -am "CI version tag $( cat ./build/version.txt )"
     - git tag $( cat ./build/version.txt )
+    - git remote get-url origin
+    # - url_host=`git remote get-url origin | sed -e "s/https:\/\/gitlab-ci-token:.*@//g"`
+    # - git remote set-url origin "https://gitlab-ci-token:${CI_TAG_UPLOAD_TOKEN}@${url_host}"
+    - git remote set-url origin "git@gitlab.com:yigityesilpinar/yigityesilpinarcom.git"
     - git push --tags -o ci.skip
 
 deploy:
