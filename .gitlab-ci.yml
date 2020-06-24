@@ -5,6 +5,8 @@ variables:
   DOCKER_USERNAME: 'yigityesilpinar'
   TAG: 'latest'
   DOCKER_IMAGE: '$DOCKER_USERNAME/$PROJECT_NAME:$TAG'
+  GCLOUD_DOCKER_IMAGE: 'gcr.io/$GCLOUD_PROJECT_ID/web:$TAG'
+  GCLOUD_SECRETS_FILENAME: 'gcloud-service-key.json'
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ''
 
@@ -69,13 +71,17 @@ build:
 
 deploy:
   stage: deploy
+  only:
+    - master
   dependencies:
     - build
   script:
-    - docker build -t $DOCKER_IMAGE .
-    - docker login -u $DOCKER_USERNAME -p $DOCKER_REGISTRY_PASSWORD
-    - docker push $DOCKER_IMAGE
-    # https://docs.gitlab.com/ee/ci/ci_cd_for_external_repos/bitbucket_integration.html
-    # docker tag getting-started ${DOCKER_USERNAME}/getting-started
+    # prepare auth for gcloud
+    - echo $GCLOUD_SERVICE_KEY > ./$GCLOUD_SECRETS_FILENAME
+    - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ./$GCLOUD_SECRETS_FILENAME
+    # build docker image
+    - docker build -t $GCLOUD_DOCKER_IMAGE .
+    - docker login -u _json_key --password-stdin https://gcr.io < ./$GCLOUD_SECRETS_FILENAME
+    - docker push $GCLOUD_DOCKER_IMAGE
   tags:
     - docker
