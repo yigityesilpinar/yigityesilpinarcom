@@ -9,3 +9,10 @@ RUN apk --update add nodejs npm curl nano bash wget make ca-certificates openssl
 RUN wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz && \
     tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true && \
     google-cloud-sdk/bin/gcloud --quiet components update
+
+# prepare git and ssh configs for CI
+
+RUN git config --global user.email "yigityesilpinar@gmail.com" && \
+    git config --global user.name "yigityesilpinar" && \
+    git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/" && \
+    mkdir /root/.ssh 

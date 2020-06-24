@@ -69,7 +69,11 @@ build:
   script:
     - npm run build
     - npm run generateVersion
-    - npm version $( cat ./build/version.txt )
+    - npm version --no-git-tag-version $( cat ./build/version.txt )
+    - echo "${CI_DEPLOY_KEY}" > /root/.ssh/id_rsa && chmod 400 /root/.ssh/id_rsa
+    - ssh-keyscan gitlab.com >> /root/.ssh/known_hosts
+    - git commit -am "CI version tag $( cat ./build/version.txt )"
+    - git tag $( cat ./build/version.txt )
     - git push --tags -o ci.skip
 
 deploy:
