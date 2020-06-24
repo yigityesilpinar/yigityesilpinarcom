@@ -27,6 +27,7 @@ gitDescribeCommand.on('exit', (code) => {
     tag = patchVersion(latestTag)
   } else {
     console.log('no tags yet')
+    tag = patchVersion(tag)
   }
   fs.writeFileSync(versionFilePath, tag)
   console.log(`New version '${tag}' is written to ${versionFilePath}`)
