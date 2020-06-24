@@ -68,11 +68,15 @@ build:
     expire_in: 30 mins
   script:
     - npm run build
+    - npm run generateVersion
+    - npm version $( cat ./build/version.txt )
+    - git push --tags
 
 deploy:
   stage: deploy
+  #TODO: revert disabling deploy
   only:
-    - master
+    - xxx
   dependencies:
     - build
   script:

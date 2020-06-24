@@ -16,7 +16,8 @@
     "lint:css": "stylelint './src/**/*.ts'",
     "lint:js": "eslint --ext .tsx,.ts,.js,.jsx .",
     "prod": "cross-env NODE_ENV=production node build/server.js",
-    "type:check": "tsc --noEmit"
+    "type:check": "tsc --noEmit",
+    "generateVersion" : "ts-node ./scripts/version"
   },
   "browserslist": {
     "development": [
