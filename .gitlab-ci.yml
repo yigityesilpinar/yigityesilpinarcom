@@ -38,34 +38,46 @@ stages:
     policy: pull
 
 install:
+  stage: install
+  # TODO: remove
+  only:
+    - test
   cache:
     # inherit all global cache settings
     <<: *global_cache
     # override the policy
     policy: pull-push
-  stage: install
   script:
     - npm install
 
 lint:type:check:
-  extends: .pullNode
   stage: lint
+  extends: .pullNode
+  # TODO: remove
+  only:
+    - test
   script:
     - npm run type:check
 
 lint:lint:
-  extends: .pullNode
   stage: lint
+  extends: .pullNode
+  # TODO: remove
+  only:
+    - test
   script:
     - npm run lint
 
 build:
+  stage: build
   extends: .pullNode
+  # TODO: remove
+  only:
+    - test
   artifacts:
     paths:
       - build/
     expire_in: 30 mins
-  stage: build
   script:
     - npm run build
 
@@ -73,12 +85,13 @@ deploy:
   stage: deploy
   only:
     - master
-  dependencies:
-    - build
+  # TODO: revert
+  # dependencies:
+  #   - build
   script:
     # prepare auth for gcloud
     - echo $GCLOUD_SERVICE_KEY > ./$GCLOUD_SECRETS_FILENAME
-    - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ./$GCLOUD_SECRETS_FILENAME
+    - gcloud auth activate-service-account --key-file ./$GCLOUD_SECRETS_FILENAME
     # build docker image
     - docker build -t $GCLOUD_DOCKER_IMAGE .
     - docker login -u _json_key --password-stdin https://gcr.io < ./$GCLOUD_SECRETS_FILENAME
