@@ -70,7 +70,7 @@ build:
     - npm run build
     - npm run generateVersion
     - npm version $( cat ./build/version.txt )
-    - git push --tags
+    - git push --tags -o ci.skip
 
 deploy:
   stage: deploy
