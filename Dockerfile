@@ -1,3 +1,5 @@
+# docker build -t yigityesilpinar/yigityesilpinarcom:latest .
+# docker run -p 8080:8080 --name yycom yigityesilpinar/yigityesilpinarcom:latest
 FROM node:12-alpine AS app-base
 
 ENV NPM_CONFIG_LOGLEVEL warn
