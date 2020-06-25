@@ -90,9 +90,10 @@ version:
     - ssh-keyscan gitlab.com >> /root/.ssh/known_hosts
     - git commit -am "CI version tag $( cat $VERSION_FILEPATH )"
     - git tag $( cat $VERSION_FILEPATH )
-    - git remote set-url origin "git@gitlab.com:$PROJECT_USERNAME/$CI_PROJECT_NAME.git"
-    - git push --follow-tags -o ci.skip
-    # - git push origin $( cat $VERSION_FILEPATH ) -o ci.skip
+    - git remote set-url origin "git@gitlab.com:$CI_PROJECT_PATH.git"
+    - git push origin HEAD:$CI_COMMIT_REF_NAME -o ci.skip # Pushes to the same branch as the trigger
+    # push git tag
+    - git push origin $( cat $VERSION_FILEPATH ) -o ci.skip
 
 deploy:
   stage: deploy
