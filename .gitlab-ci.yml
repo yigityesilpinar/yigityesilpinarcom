@@ -3,6 +3,7 @@ image: yigityesilpinar/docker-node:latest
 variables:
   PROJECT_USERNAME: 'yigityesilpinar'
   RELEASE_BRANCH: 'master'
+  GCLOUD_CLI_PATH: "/google-cloud-sdk/bin/gcloud"
   GCLOUD_DOCKER_IMAGE: 'gcr.io/$GCLOUD_PROJECT_ID/web'
   GCLOUD_SECRETS_FILEPATH: './gcloud-service-key.json'
   GCLOUD_CLUSTER: 'yycom-cluster'
@@ -107,14 +108,14 @@ deploy:
     # prepare auth for gcloud
     - IMAGE_TAG=$( cat $VERSION_FILEPATH )
     - echo $GCLOUD_SERVICE_KEY > $GCLOUD_SECRETS_FILEPATH
-    - /google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $GCLOUD_SECRETS_FILEPATH
+    - $GCLOUD_CLI_PATH auth activate-service-account --key-file $GCLOUD_SECRETS_FILEPATH
     # build docker image
     - docker build -t $GCLOUD_DOCKER_IMAGE:$IMAGE_TAG .
     - docker login -u _json_key --password-stdin https://gcr.io < $GCLOUD_SECRETS_FILEPATH
     - docker push $GCLOUD_DOCKER_IMAGE:$IMAGE_TAG
     # deploy the new image to prod using gcloud & kubectl
-    - gcloud config set project $GCLOUD_PROJECT_ID
-    - gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_CLUSTER_ZONE
+    - $GCLOUD_CLI_PATH config set project $GCLOUD_PROJECT_ID
+    - $GCLOUD_CLI_PATH container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_CLUSTER_ZONE
     - sed -i 's|${DOCKER_IMAGE_WITH_TAG}|'"$GCLOUD_DOCKER_IMAGE":"$IMAGE_TAG"'|g' web-deployment.yaml
     - kubectl apply -f web-deployment.yaml
   tags:
