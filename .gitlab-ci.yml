@@ -3,7 +3,8 @@ image: yigityesilpinar/docker-node:latest
 variables:
   PROJECT_USERNAME: 'yigityesilpinar'
   RELEASE_BRANCH: 'master'
-  GCLOUD_CLI_PATH: "/google-cloud-sdk/bin/gcloud"
+  GCLOUD_CLI_PATH: '/google-cloud-sdk/bin/gcloud'
+  KUBECTL_CLI_PATH: '/google-cloud-sdk/bin/kubectl'
   GCLOUD_DOCKER_IMAGE: 'gcr.io/$GCLOUD_PROJECT_ID/web'
   GCLOUD_SECRETS_FILEPATH: './gcloud-service-key.json'
   GCLOUD_CLUSTER: 'yycom-cluster'
@@ -117,6 +118,6 @@ deploy:
     - $GCLOUD_CLI_PATH config set project $GCLOUD_PROJECT_ID
     - $GCLOUD_CLI_PATH container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_CLUSTER_ZONE
     - sed -i 's|${DOCKER_IMAGE_WITH_TAG}|'"$GCLOUD_DOCKER_IMAGE":"$IMAGE_TAG"'|g' web-deployment.yaml
-    - kubectl apply -f web-deployment.yaml
+    - $KUBECTL_CLI_PATH apply -f web-deployment.yaml
   tags:
     - docker
