@@ -10,21 +10,21 @@
 - dockerhub push
 - Sentry
 - google cloud k8s configuration & deployment
+- versioning (package and docker tag)
 
 # TODOS
 
-- versioning (package and docker tag)
-- staging
+- unit integration e2e
 - Skills page dnd and small game related to skills, https://api.npmjs.org/downloads/range/2020-06-19:2020-06-19/react, https://github.com/npm/registry/blob/master/docs/download-counts.md
 - cms
 - https://prettier.io/docs/en/integrating-with-linters.html, https://www.npmjs.com/package/yaml-lint
 - responsiveness
 - caching (server-side)
 - service worker/pwa
+- staging
 - formidable
 - md editor
 - retry react-hot-loader or react-fast-refresh
-- unit integration e2e
 - cv generator
 - analytics
 

@@ -1,6 +1,6 @@
 {
   "name": "yigityesilpinarcom",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Personal website",
   "license": "ISC",
   "author": "yigityesilpinar@gmail.com",
@@ -12,12 +12,12 @@
     "build:server": "cross-env NODE_ENV=production TS_NODE_PROJECT=\"tsconfig.json\" webpack -p --config='config/webpack/server.ts' ",
     "cleanup": "rm -rf /build && mkdir -p ./build",
     "dev": "npm run cleanup && cross-env NODE_ENV=development nodemon",
+    "generateVersion": "ts-node ./scripts/version",
     "lint": "run-p 'lint:js' 'lint:css'",
     "lint:css": "stylelint './src/**/*.ts'",
     "lint:js": "eslint --ext .tsx,.ts,.js,.jsx .",
     "prod": "cross-env NODE_ENV=production node build/server.js",
-    "type:check": "tsc --noEmit",
-    "generateVersion" : "ts-node ./scripts/version"
+    "type:check": "tsc --noEmit"
   },
   "browserslist": {
     "development": [

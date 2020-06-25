@@ -1,12 +1,11 @@
 image: yigityesilpinar/docker-node:latest
 
 variables:
-  PROJECT_NAME: 'yigityesilpinarcom'
-  DOCKER_USERNAME: 'yigityesilpinar'
-  TAG: 'latest'
-  DOCKER_IMAGE: '$DOCKER_USERNAME/$PROJECT_NAME:$TAG'
-  GCLOUD_DOCKER_IMAGE: 'gcr.io/$GCLOUD_PROJECT_ID/web:$TAG'
-  GCLOUD_SECRETS_FILENAME: 'gcloud-service-key.json'
+  PROJECT_USERNAME: 'yigityesilpinar'
+  RELEASE_BRANCH: 'master'
+  GCLOUD_DOCKER_IMAGE: 'gcr.io/$GCLOUD_PROJECT_ID/web'
+  GCLOUD_SECRETS_FILEPATH: './gcloud-service-key.json'
+  VERSION_FILEPATH: './build/version.txt'
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ''
 
@@ -28,6 +27,7 @@ stages:
   - install
   - lint
   - build
+  - version
   - deploy
 
 .pullNode:
@@ -68,32 +68,46 @@ build:
     expire_in: 30 mins
   script:
     - npm run build
+
+version:
+  stage: version
+  extends: .pullNode
+  only:
+    - $RELEASE_BRANCH
+  dependencies:
+    - build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 30 mins
+  script:
+    # find the latest tag and generate next version into $VERSION_FILEPATH
     - npm run generateVersion
-    - npm version --no-git-tag-version $( cat ./build/version.txt )
+    # update package.json version (and lock file) only
+    - npm version --no-git-tag-version $( cat $VERSION_FILEPATH )
+    # prepare git ssh and push the new version (tag)
     - echo "${CI_DEPLOY_KEY}" > /root/.ssh/id_rsa && chmod 400 /root/.ssh/id_rsa
     - ssh-keyscan gitlab.com >> /root/.ssh/known_hosts
-    - git commit -am "CI version tag $( cat ./build/version.txt )"
-    - git tag $( cat ./build/version.txt )
-    - git remote get-url origin
-    # - url_host=`git remote get-url origin | sed -e "s/https:\/\/gitlab-ci-token:.*@//g"`
-    # - git remote set-url origin "https://gitlab-ci-token:${CI_TAG_UPLOAD_TOKEN}@${url_host}"
-    - git remote set-url origin "git@gitlab.com:yigityesilpinar/yigityesilpinarcom.git"
-    - git push --tags -o ci.skip
+    - git commit -am "CI version tag $( cat $VERSION_FILEPATH )"
+    - git tag $( cat $VERSION_FILEPATH )
+    - git remote set-url origin "git@gitlab.com:$PROJECT_USERNAME/$CI_PROJECT_NAME.git"
+    - git push origin $RELEASE_BRANCH -o ci.skip
+    - git push origin $( cat $VERSION_FILEPATH ) -o ci.skip
 
 deploy:
   stage: deploy
-  #TODO: revert disabling deploy
   only:
-    - xxx
+    - $RELEASE_BRANCH
   dependencies:
-    - build
+    - version
   script:
     # prepare auth for gcloud
-    - echo $GCLOUD_SERVICE_KEY > ./$GCLOUD_SECRETS_FILENAME
-    - /google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ./$GCLOUD_SECRETS_FILENAME
+    - IMAGE_TAG=$( cat $VERSION_FILEPATH )
+    - echo $GCLOUD_SERVICE_KEY > $GCLOUD_SECRETS_FILEPATH
+    - /google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $GCLOUD_SECRETS_FILEPATH
     # build docker image
-    - docker build -t $GCLOUD_DOCKER_IMAGE .
-    - docker login -u _json_key --password-stdin https://gcr.io < ./$GCLOUD_SECRETS_FILENAME
-    - docker push $GCLOUD_DOCKER_IMAGE
+    - docker build -t $GCLOUD_DOCKER_IMAGE:$IMAGE_TAG .
+    - docker login -u _json_key --password-stdin https://gcr.io < $GCLOUD_SECRETS_FILEPATH
+    - docker push $GCLOUD_DOCKER_IMAGE:$IMAGE_TAG
   tags:
     - docker
