@@ -72,8 +72,8 @@ build:
 version:
   stage: version
   extends: .pullNode
-  only:
-    - $RELEASE_BRANCH
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $RELEASE_BRANCH'
   dependencies:
     - build
   artifacts:
@@ -96,8 +96,8 @@ version:
 
 deploy:
   stage: deploy
-  only:
-    - $RELEASE_BRANCH
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $RELEASE_BRANCH'
   dependencies:
     - version
   script:
