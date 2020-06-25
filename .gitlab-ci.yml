@@ -5,6 +5,8 @@ variables:
   RELEASE_BRANCH: 'master'
   GCLOUD_DOCKER_IMAGE: 'gcr.io/$GCLOUD_PROJECT_ID/web'
   GCLOUD_SECRETS_FILEPATH: './gcloud-service-key.json'
+  GCLOUD_CLUSTER: 'yycom-cluster'
+  GCLOUD_CLUSTER_ZONE: 'europe-west3-b'
   VERSION_FILEPATH: './build/version.txt'
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ''
@@ -110,5 +112,10 @@ deploy:
     - docker build -t $GCLOUD_DOCKER_IMAGE:$IMAGE_TAG .
     - docker login -u _json_key --password-stdin https://gcr.io < $GCLOUD_SECRETS_FILEPATH
     - docker push $GCLOUD_DOCKER_IMAGE:$IMAGE_TAG
+    # deploy the new image to prod using gcloud & kubectl
+    - gcloud config set project $GCLOUD_PROJECT_ID
+    - gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_CLUSTER_ZONE
+    - sed -i 's|${DOCKER_IMAGE_WITH_TAG}|'"$GCLOUD_DOCKER_IMAGE":"$IMAGE_TAG"'|g' web-deployment.yaml
+    - kubectl apply -f web-deployment.yaml
   tags:
     - docker

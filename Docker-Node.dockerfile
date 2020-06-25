@@ -1,3 +1,4 @@
+#! This image is used as a CI Container
 # docker build  -f Docker-Node.dockerfile -t yigityesilpinar/docker-node:latest  .
 FROM docker:stable-dind AS app-base
 RUN apk --update add nodejs npm curl nano bash wget make ca-certificates openssl python3 git&& \
@@ -8,7 +9,8 @@ RUN apk --update add nodejs npm curl nano bash wget make ca-certificates openssl
 # install gcloud CLI
 RUN wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz && \
     tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true && \
-    google-cloud-sdk/bin/gcloud --quiet components update
+    google-cloud-sdk/bin/gcloud components install kubectl -q && \
+    google-cloud-sdk/bin/gcloud -q components update
 
 # prepare git and ssh configs for CI
 

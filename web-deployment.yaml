@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yycom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: yycom
+  template:
+    metadata:
+      labels:
+        run: yycom
+    spec:
+      containers:
+        - name: web
+          image: ${DOCKER_IMAGE_WITH_TAG}
+          env:
+            - name: 'PORT'
+              value: '8080'
+            - name: 'NODE_ENV'
+              value: 'production'
