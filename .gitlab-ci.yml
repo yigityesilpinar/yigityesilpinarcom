@@ -91,8 +91,8 @@ version:
     - git commit -am "CI version tag $( cat $VERSION_FILEPATH )"
     - git tag $( cat $VERSION_FILEPATH )
     - git remote set-url origin "git@gitlab.com:$PROJECT_USERNAME/$CI_PROJECT_NAME.git"
-    - git push origin $RELEASE_BRANCH -o ci.skip
-    - git push origin $( cat $VERSION_FILEPATH ) -o ci.skip
+    - git push --follow-tags -o ci.skip
+    # - git push origin $( cat $VERSION_FILEPATH ) -o ci.skip
 
 deploy:
   stage: deploy
