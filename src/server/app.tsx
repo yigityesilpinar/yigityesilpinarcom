@@ -1,11 +1,16 @@
 import express from 'express'
 import * as Sentry from '@sentry/node'
 
+import { version } from '../../package.json'
 const expressStaticGzip = require('express-static-gzip')
 
 const isProd = process.env.NODE_ENV === 'production'
 const port = process.env.PORT || 8080
 const app = express()
+
+app.get('/version', (_req, res) => {
+  res.json({ version })
+})
 
 if (!isProd) {
   const webpack = require('webpack')
