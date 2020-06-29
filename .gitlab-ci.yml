@@ -103,6 +103,7 @@ deploy:
   stage: deploy
   rules:
     - if: '$CI_COMMIT_BRANCH == $RELEASE_BRANCH'
+  when: manual
   dependencies:
     - version
   script:
