@@ -29,7 +29,7 @@ cache: &global_cache
 
 stages:
   - install
-  - lint
+  - lintAndTest
   - build
   - version
   - deploy
@@ -51,17 +51,23 @@ install:
   script:
     - npm install
 
-lint:type:check:
-  stage: lint
+lintAndTest:type:check:
+  stage: lintAndTest
   extends: .pullNode
   script:
     - npm run type:check
 
-lint:lint:
-  stage: lint
+lintAndTest:lint:
+  stage: lintAndTest
   extends: .pullNode
   script:
     - npm run lint
+
+lintAndTest:test:
+  stage: lintAndTest
+  extends: .pullNode
+  script:
+    - npm run test
 
 build:
   stage: build
@@ -112,7 +118,7 @@ deploy:
     - echo $GCLOUD_SERVICE_KEY > $GCLOUD_SECRETS_FILEPATH
     - $GCLOUD_CLI_PATH auth activate-service-account --key-file $GCLOUD_SECRETS_FILEPATH
     # put the right version for image in package.json
-    # - sed -i 's|\"version\": \".*\"|\"version\": \"'$IMAGE_TAG'\"|' package.json 
+    - sed -i -e 's|\"version\":\s\".*\"|\"version\":\"'$IMAGE_TAG'\"|' package.json
     # build docker image
     - docker build -t $GCLOUD_DOCKER_IMAGE:$IMAGE_TAG .
     - docker login -u _json_key --password-stdin https://gcr.io < $GCLOUD_SECRETS_FILEPATH

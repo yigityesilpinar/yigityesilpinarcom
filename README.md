@@ -16,6 +16,7 @@
 # TODOS
 
 - e2e test setup
+- git pre push/commit hooks
 - Skills page dnd and small game related to skills, https://api.npmjs.org/downloads/range/2020-06-19:2020-06-19/react, https://github.com/npm/registry/blob/master/docs/download-counts.md
 - cms
 - blog, code highlight https://prismjs.com/
