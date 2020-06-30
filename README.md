@@ -11,13 +11,18 @@
 - Sentry
 - google cloud k8s configuration & deployment
 - versioning (package and docker tag)
+- jest setup
 
 # TODOS
 
-- unit integration e2e
+- e2e test setup
 - Skills page dnd and small game related to skills, https://api.npmjs.org/downloads/range/2020-06-19:2020-06-19/react, https://github.com/npm/registry/blob/master/docs/download-counts.md
 - cms
+- blog, code highlight https://prismjs.com/
+- security
+- https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/, https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/
 - https://prettier.io/docs/en/integrating-with-linters.html, https://www.npmjs.com/package/yaml-lint
+- jenkins (optional/maybe)
 - responsiveness
 - caching (server-side)
 - service worker/pwa

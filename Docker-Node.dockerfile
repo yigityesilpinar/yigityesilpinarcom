@@ -1,5 +1,7 @@
 #! This image is used as a CI Container
 # docker build  -f Docker-Node.dockerfile -t yigityesilpinar/docker-node:latest  .
+# docker run -it --name docker-node yigityesilpinar/docker-node bash 
+# docker cp `pwd` docker-node:/repository/
 FROM docker:stable-dind AS app-base
 RUN apk --update add nodejs npm curl nano bash wget make ca-certificates openssl python3 git&& \
     update-ca-certificates
