@@ -112,7 +112,7 @@ deploy:
     - echo $GCLOUD_SERVICE_KEY > $GCLOUD_SECRETS_FILEPATH
     - $GCLOUD_CLI_PATH auth activate-service-account --key-file $GCLOUD_SECRETS_FILEPATH
     # put the right version for image in package.json
-    - sed -i 's|\"version\": \".*\"|\"version\": \"'$IMAGE_TAG'\"|' package.json 
+    # - sed -i 's|\"version\": \".*\"|\"version\": \"'$IMAGE_TAG'\"|' package.json 
     # build docker image
     - docker build -t $GCLOUD_DOCKER_IMAGE:$IMAGE_TAG .
     - docker login -u _json_key --password-stdin https://gcr.io < $GCLOUD_SECRETS_FILEPATH
