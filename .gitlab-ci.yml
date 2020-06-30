@@ -77,6 +77,8 @@ build:
       - build/
     expire_in: 30 mins
   script:
+    # bump version in package.json pre-build (is used in /version by server)
+    - npm run generateVersion -- --packageJsonOnly
     - npm run build
 
 version:

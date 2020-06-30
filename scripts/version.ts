@@ -2,10 +2,16 @@
 import { spawn } from 'child_process'
 import fs from 'fs'
 import path from 'path'
-import { OUTPUT_DIR } from '../config/paths'
+import { OUTPUT_DIR, PROJECT_ROOT_DIR } from '../config/paths'
+
+const cliArgs = process.argv.slice(2)
+const packageJSONOnly = cliArgs.some((arg) =>
+  arg.toLowerCase().includes('packagejsononly')
+)
 
 let tag = '0.0.1'
 const versionFilePath = path.join(OUTPUT_DIR, 'version.txt')
+const packagejsonPath = path.join(PROJECT_ROOT_DIR, 'package.json')
 // find the last tag
 const gitDescribeCommand = spawn(
   'sh',
@@ -29,6 +35,15 @@ gitDescribeCommand.on('exit', (code) => {
     console.log('no tags yet')
     tag = patchVersion(tag)
   }
-  fs.writeFileSync(versionFilePath, tag)
+  if (packageJSONOnly) {
+    // read, replace and write back to package.json
+    const file = fs.readFileSync(packagejsonPath).toString()
+    fs.writeFileSync(
+      packagejsonPath,
+      file.replace(/"version": ".*"/, `"version": "${tag}"`)
+    )
+  } else {
+    fs.writeFileSync(versionFilePath, tag)
+  }
   console.log(`New version '${tag}' is written to ${versionFilePath}`)
 })
