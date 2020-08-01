@@ -20,6 +20,12 @@ const routes: RouteConfig[] = [
     navlinkPosition: 1,
   },
   {
+    path: '/develop',
+    component: loadable(() => import('src/routes/Develop')),
+    exact: true,
+    displayName: 'Develop',
+  },
+  {
     path: '/',
     component: loadable(() => import('src/routes/Home')),
     exact: true,

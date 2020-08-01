@@ -12,9 +12,9 @@ const Typography: React.FC<Props> = ({
   variant = 'body',
   ...props
 }) => (
-    <Container variant={variant} {...props}>
-      {children}
-    </Container>
-  )
+  <Container variant={variant} {...props}>
+    {children}
+  </Container>
+)
 
 export default Typography

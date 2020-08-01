@@ -12,14 +12,15 @@ export const Container = styled.h4.attrs((props: Props) => ({
   ...props,
   as: getElemtypeForVariant(props.variant),
 }))<Props>`
-  color: ${(props) => props.theme.palette.secondary.main};
+  color: ${(props) => props.theme.palette.white.main};
   margin: 0;
   ${(props) =>
     props.variant === 'h1' &&
     css`
-      font-size: 36px;
-      line-height: 30px;
+      font-size: max(2.7vw, 36px);
+      line-height: max(3.6vw, 48px);
       font-weight: 900;
+      color: ${props.theme.palette.green.light};
     `};
   ${(props) =>
     props.variant === 'h2' &&
@@ -32,9 +33,8 @@ export const Container = styled.h4.attrs((props: Props) => ({
   ${(props) =>
     props.variant === 'body' &&
     css`
-      font-size: 15px;
-      line-height: 15px;
+      font-size: max(1.5vw, 20px);
+      line-height: max(2vw, 27px);
       font-weight: 300;
-      color: ${props.theme.palette.secondary.light};
     `};
 `

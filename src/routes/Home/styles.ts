@@ -1,37 +1,30 @@
 import styled from 'styled-components'
-import { textAreaSpacings } from 'src/components/SmartTextArea/TextArea/styles'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  @media screen and (max-width: ${({ theme }) => theme.mobileBreakPoint}) {
+    align-items: flex-start;
+  }
+`
 
-// https://github.com/microsoft/vscode/blob/master/extensions/theme-defaults/themes/dark_vs.json
-export const JSXFormatter = styled.div`
-  background: #1e1e1e;
-  ${textAreaSpacings}
-  word-break: break-word;
-  pointer-events: none;
-  /* !important, border mismatch causes text overlap */
-  border: 1px solid transparent;
-  font-family: Menlo, Monaco, 'Courier New', monospace;
-  font-weight: normal;
-  font-size: 12px;
-  font-feature-settings: 'liga' 0, 'calt' 0;
-  line-height: 18px;
-  letter-spacing: 0px;
-  span {
-    white-space: pre-wrap;
+export const Content = styled.div`
+  display: flex;
+  @media screen and (max-width: ${({ theme }) => theme.mobileBreakPoint}) {
+    flex-direction: column;
+    align-items: center;
+    [class*='col-'] {
+      width: 80%;
+    }
+    .col-1 {
+      display: none;
+    }
   }
-  .JSXElement {
-    color: #4ec9b0;
-    position: relative;
-  }
-  .text {
-    color: #d4d4d4;
-  }
-  .JSXExpression {
-    color: #9cdcfe;
-  }
-  .bracket {
-    color: orchid;
-  }
-  /* #569cd6;  html tags */
+`
+
+export const BottomAlign = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `

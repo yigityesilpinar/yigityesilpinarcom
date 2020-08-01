@@ -11,7 +11,17 @@ const defaultTheme = {
     error: {
       main: 'red', // TODO: define
     },
+    background: {
+      main: '#252424',
+    },
+    white: {
+      main: '#fafafa',
+    },
+    green: {
+      light: '#05F26C',
+    },
   },
+  mobileBreakPoint: '1000px',
   boxShadow:
     '0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15)',
 }
