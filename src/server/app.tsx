@@ -22,7 +22,7 @@ if (!isProd) {
   const compiler = webpack([clientConfig, serverConfig])
   const [clientCompiler, _serverCompiler] = compiler.compilers
   const webpackDevMiddleware = webpackDevMiddlewareFn(compiler, {
-    publicPath: clientConfig.devServer?.publicPath || '/',
+    publicPath: clientConfig.devServer.publicPath || '/',
     serverSideRender: true,
   })
   const webpackHotMiddleware = webpackHotMiddlewareFn(clientCompiler)
