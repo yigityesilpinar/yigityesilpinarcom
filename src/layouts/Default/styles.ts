@@ -1,9 +1,16 @@
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
+export const GlobalStyles = createGlobalStyle`
+body, body > #root
+{
+  font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif;
+  min-height: 100vh;
+}
+`
 export const AppContainer = styled.div`
+  min-height: 100vh;
   position: relative;
   color: #3c4043;
-  font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif;
   line-height: 1.25rem;
   > * {
     box-shadow: ${(props) => props.theme.boxShadow};

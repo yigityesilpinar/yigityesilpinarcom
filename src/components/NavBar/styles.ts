@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
-export const Container = styled.div``
+// TODO: handle menu
+export const Container = styled.div`
+  display: none;
+`
 
 export const LinksContainer = styled.div`
   display: flex;
