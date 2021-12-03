@@ -12,6 +12,7 @@ body, body > #root
 }
 * {
   box-sizing: border-box;
+  color: rgba(0,0,0,0.75);
 }
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}

@@ -87,7 +87,7 @@ const clientConfig: webpack.Configuration & webpackDevServer.Configuration = {
     splitChunks: {
       cacheGroups: {
         commons: {
-          name: 'vendors',
+          name: 'defaultVendors',
           chunks: 'initial',
           minChunks: 2,
         },
