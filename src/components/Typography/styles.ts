@@ -10,9 +10,9 @@ const getElemtypeForVariant = (variant: Props['variant'] = 'body') => {
 
 export const Container = styled.h4.attrs((props: Props) => ({
   ...props,
-  as: getElemtypeForVariant(props.variant),
+  as: getElemtypeForVariant(props.variant)
 }))<Props>`
-  color: ${(props) => props.theme.palette.white.main};
+  color: ${(props) => props.theme.palette.text.primary};
   margin: 0;
   ${(props) =>
     props.variant === 'h1' &&
@@ -20,7 +20,6 @@ export const Container = styled.h4.attrs((props: Props) => ({
       font-size: max(2.7vw, 36px);
       line-height: max(3.6vw, 48px);
       font-weight: 900;
-      color: ${props.theme.palette.green.light};
     `};
   ${(props) =>
     props.variant === 'h2' &&

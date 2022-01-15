@@ -59,9 +59,10 @@ export const parseJSXElement: (expression: JSXElement, rawText: string) => Parse
                   type: 'JSXExpression',
                   text: rawText.substring(child.start || 0, child.end || 0)
                 }
+              } else {
+                console.error('NOT COVERED CASE', { type: child.type })
+                return undefined as unknown as Parsed
               }
-              // TODO: cover all cases
-              return undefined as unknown as Parsed
             })
             .filter((c) => c)
             .flat() as Parsed[])

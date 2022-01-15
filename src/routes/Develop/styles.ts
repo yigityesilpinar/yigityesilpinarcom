@@ -27,6 +27,9 @@ export const JSXFormatter = styled.div`
   .text {
     color: #d4d4d4;
   }
+  .string {
+    color: #ce9178;
+  }
   .JSXExpression {
     color: #9cdcfe;
   }

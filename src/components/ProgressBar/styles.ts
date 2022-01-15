@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Progress = styled.div<{ $percantage: number }>`
   position: absolute;
-  background-color: ${({ theme }) => theme.palette.green.light};
+  background-color: ${({ theme }) => theme.palette.primary.light};
   width: ${({ $percantage }) => $percantage}%;
   height: 100%;
   z-index: 1;
@@ -19,8 +19,6 @@ export const Progress = styled.div<{ $percantage: number }>`
 
 export const Total = styled.div`
   position: absolute;
-  background-color: ${({ theme }) =>
-    lighten(0.1)(theme.palette.background.main)};
   height: 100%;
   width: 100%;
 `

@@ -95,7 +95,6 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
             __html: `window.passedToClient=${JSON.stringify(passedToClient)}`
           }}
         />
-        <noscript>You need to enable JavaScript to run this app.</noscript>
       </body>
       {scriptTags}
     </html>
