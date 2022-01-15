@@ -1,27 +1,18 @@
 # docker build -t yigityesilpinar/yigityesilpinarcom:latest .
-# docker run -p 8080:8080 --name yycom yigityesilpinar/yigityesilpinarcom:latest
-FROM node:12-alpine AS app-base
+# docker stop yycom | docker rm yycom | docker run -p 3000:3000 --name yycom yigityesilpinar/yigityesilpinarcom:latest
+FROM node:14.16.1-alpine3.13
 
 ENV NPM_CONFIG_LOGLEVEL warn
-ARG PORT=8080
 # only install production dependencies and other production benefits
 ENV NODE_ENV production
 
+WORKDIR /usr/src/app
+RUN npm install pm2 -g
 # installation
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json  ecosystem.config.js  ./
 # RUN sha1sum package-lock.json
 RUN npm install
 
+COPY ./dist/ ./dist/
 
-# build 
-# COPY ./src ./src
-# COPY ./config ./config
-# COPY .babelrc tsconfig.json ./
-# RUN npm run build
-
-COPY ./build ./build
-
-EXPOSE ${PORT}
-
-CMD ["npm", "run", "prod"]
-
+CMD ["pm2-docker", "ecosystem.config.js"]

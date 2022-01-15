@@ -3,3 +3,8 @@ node_modules/*
 build/**
 dist/**
 .eslintrc.js
+*.d.ts
+jest.config.js
+src/api/generated/**
+ecosystem.config.js
+generatePackageUpdate.js

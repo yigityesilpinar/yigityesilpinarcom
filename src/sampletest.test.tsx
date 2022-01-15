@@ -7,7 +7,7 @@ import theme from 'src/styles/theme'
 import { act } from 'react-dom/test-utils'
 
 const Button = styled.button.attrs(() => ({
-  'data-testid': 'my-button-to-test',
+  'data-testid': 'my-button-to-test'
 }))`
   color: red;
 `
@@ -22,11 +22,12 @@ const useCounter = (options?: useCounterOptions) => {
   return {
     count,
     increment,
-    decrement,
+    decrement
   }
 }
 
 const CustomHookRender: React.FC<{
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   children: (a: any) => null
 }> = ({ children, ...restProps }) => children(useCounter(restProps))
 
@@ -48,10 +49,7 @@ const setupHook = (options?: useCounterOptions) => {
 
 const asyncExampleFn = ({ fail = false, delay = 2000 }) =>
   new Promise((resolve, reject) => {
-    setTimeout(
-      () => (fail ? reject('some error message') : resolve('success')),
-      delay
-    )
+    setTimeout(() => (fail ? reject('some error message') : resolve('success')), delay)
   })
 
 describe('Test patterns/examples', () => {

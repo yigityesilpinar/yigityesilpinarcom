@@ -1,5 +1,4 @@
 import { get } from './lib/http'
-import { request } from 'http'
 // TODO: move to a function
 // paramaters
 const DEFAULT_RQPS = 1000 // TODO: 1

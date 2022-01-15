@@ -9,8 +9,10 @@ loadableReady(() => {
   hydrate(<App />, root)
 })
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 if (module.hot) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   module.hot.accept()
 }
