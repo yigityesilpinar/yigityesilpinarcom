@@ -51,7 +51,7 @@ const Resume: React.FC<unknown> = () => {
       const pageOneElem = resumePageOneRef.current
       const pageTwoElem = resumePageTwoRef.current
       const pageThreeElem = resumePageThreeRef.current
-      const scale = 720 / resumePageOneRef.current.offsetWidth
+      const scale = 1080 / resumePageOneRef.current.offsetWidth
       const html2canvasOptions = {
         scale,
         backgroundColor: '#ffffff'
