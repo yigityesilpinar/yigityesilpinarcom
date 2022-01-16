@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const ProjectItem = styled.div`
   padding-bottom: 1.5em;
   img {
+    height: 1.5em;
     padding-right: 0.3em;
   }
 `
