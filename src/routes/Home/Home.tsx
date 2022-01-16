@@ -3,30 +3,43 @@ import React from 'react'
 import Typography from 'src/components/Typography'
 import ProgressBar from 'src/components/ProgressBar'
 
-import SvgInprogress from './assets/SvgInprogress'
-import { Container, Content, BottomAlign } from './styles'
+import heroImgSrc from './assets/hero-img.png'
+import aboutMe from './assets/about-me-img.png'
+import { HomeSectionContainer, HomeSectionRow, HeroContent, HeroImg, AboutMeImg, AboutMeContent } from './styles'
 
 const Home: React.FC = () => (
-  <Container>
-    <Content>
-      <div className="col-1" />
-      <div className="col-4">
-        <SvgInprogress />
-      </div>
-      <div className="col-1" />
-      <BottomAlign className="col-4">
-        <Typography variant="h1">Work in progress</Typography>
-        <br />
-        <Typography>
-          I am currently working on my brand-new personal website. I am really
-          excited about it and spending all my free time working on it. I still
-          need some more time so please be patient.
-        </Typography>
-        <br />
-        <ProgressBar percantage={40} />
-      </BottomAlign>
-    </Content>
-  </Container>
+  <>
+    <HomeSectionContainer withoutVerticalPadding>
+      <HomeSectionRow>
+        <HeroContent>
+          <Typography variant="h1">Senior Frontend Developer</Typography>
+          <Typography variant="h3">in transistion to Full-stack Developer</Typography>
+          <Typography>
+            Hi! My name is Yiğit Yeşilpınar. I’m passionate developer who is always up for a challenge and on the
+            mission to develop my skills. Explore my website and let me know if you have any interesting projects where
+            I might help.
+          </Typography>
+        </HeroContent>
+        <HeroImg src={heroImgSrc} />
+      </HomeSectionRow>
+    </HomeSectionContainer>
+    <HomeSectionContainer>
+      <HomeSectionRow center>
+        <AboutMeImg src={aboutMe} />
+        <AboutMeContent>
+          <Typography variant="h2">About me</Typography>
+          <Typography>
+            I was born in Denizli, Turkey. I gained expeirence in companies in different coutries: Turkey, Spain, Poland
+            and currenlty in Berlin. I’m always open to interesting projects that can help me to grow.
+          </Typography>
+          <Typography>
+            Personally, I like to play guitar and spend time with family &amp; friends. I can talk about soccer and
+            basketball all day long!
+          </Typography>
+        </AboutMeContent>
+      </HomeSectionRow>
+    </HomeSectionContainer>
+  </>
 )
 
 export default Home

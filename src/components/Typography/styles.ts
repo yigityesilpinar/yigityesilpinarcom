@@ -8,32 +8,42 @@ const getElemtypeForVariant = (variant: Props['variant'] = 'body') => {
   return 'h5'
 }
 
-export const Container = styled.h4.attrs((props: Props) => ({
+export const TypographyContainer = styled.h4.attrs((props: Props) => ({
   ...props,
   as: getElemtypeForVariant(props.variant)
 }))<Props>`
-  color: ${(props) => props.theme.palette.text.primary};
+  color: ${({ theme, contrast }) => (contrast ? theme.palette.primary.contrastText : theme.palette.text.primary)};
   margin: 0;
+  padding: 0;
+  line-height: 1.4;
   ${(props) =>
     props.variant === 'h1' &&
     css`
-      font-size: max(2.7vw, 36px);
-      line-height: max(3.6vw, 48px);
+      font-size: 5em;
       font-weight: 900;
+      line-height: 1;
+      margin-bottom: 0.3em;
     `};
   ${(props) =>
     props.variant === 'h2' &&
     css`
-      font-size: 24px;
-      line-height: 24px;
-      font-weight: 300;
+      font-size: 4em;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.3em;
+    `};
+  ${(props) =>
+    props.variant === 'h3' &&
+    css`
+      font-size: 2em;
+      font-weight: 700;
+      margin-bottom: 0.3em;
     `};
 
   ${(props) =>
     props.variant === 'body' &&
     css`
-      font-size: max(1.5vw, 20px);
-      line-height: max(2vw, 27px);
-      font-weight: 300;
+      font-weight: 400;
+      line-height: 2em;
     `};
 `

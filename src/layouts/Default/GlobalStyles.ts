@@ -6,6 +6,8 @@ body, body > #root
   font-family: 'Open Sans', sans-serif;
   min-height: 100vh;
   margin: 0;
+  /* 16px for 1440px */
+  font-size: 1.11vw; 
 }
 
 .ant-select {

@@ -1,30 +1,47 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+export const HomeSectionContainer = styled.div<{ withoutVerticalPadding?: boolean }>`
+  padding-left: 7.625em;
+  ${({ withoutVerticalPadding }) =>
+    !withoutVerticalPadding &&
+    css`
+      padding-top: 13em;
+      padding-bottom: 13em;
+    `}
+`
+
+export const HomeSectionRow = styled.div<{ center?: boolean }>`
   display: flex;
-  align-items: center;
-  height: 100vh;
-  @media screen and (max-width: ${({ theme }) => theme.mobileBreakPoint}) {
-    align-items: flex-start;
+  ${({ center }) =>
+    center &&
+    css`
+      align-items: center;
+    `}
+`
+export const HeroContent = styled.div`
+  padding-top: 10em;
+
+  h1 {
+    width: 50%;
+  }
+  h5 {
+    width: 50%;
   }
 `
 
-export const Content = styled.div`
-  display: flex;
-  @media screen and (max-width: ${({ theme }) => theme.mobileBreakPoint}) {
-    flex-direction: column;
-    align-items: center;
-    [class*='col-'] {
-      width: 80%;
-    }
-    .col-1 {
-      display: none;
-    }
-  }
+export const HeroImg = styled.img`
+  width: 21.375em;
 `
 
-export const BottomAlign = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+export const AboutMeImg = styled.img`
+  width: 13em;
+  height: 13em;
+`
+
+export const AboutMeContent = styled.div`
+  padding-left: 9em;
+  width: 36em;
+  h5 + h5 {
+    margin-top: 2em;
+  }
 `

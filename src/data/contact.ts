@@ -1,5 +1,5 @@
 export interface Contact {
-  id: string
+  id: 'email' | 'place' | 'website' | 'github' | 'linkedin'
   iconSrc: string
   text: string
   link?: string

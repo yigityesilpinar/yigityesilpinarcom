@@ -16,8 +16,7 @@ const routes: RouteConfig[] = [
     path: '/contact',
     exact: true,
     component: loadable(() => import('src/routes/Contact')),
-    displayName: 'Contact',
-    navlinkPosition: 1
+    displayName: 'Contact'
   },
   {
     path: '/develop',
@@ -29,7 +28,8 @@ const routes: RouteConfig[] = [
     path: '/resume',
     component: loadable(() => import('src/routes/Resume')),
     exact: true,
-    displayName: 'Resume'
+    displayName: 'Resume',
+    navlinkPosition: 1
   },
   {
     path: '/',

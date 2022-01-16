@@ -15,7 +15,6 @@ export const TextareaAutosize = styled(_TextareaAutosize)<{
   $hasError?: boolean
 }>`
   font-family: 'Open Sans', sans-serif;
-  font-size: inherit;
   border: 1px solid ${({ theme }) => theme.palette.secondary.main};
   border-radius: 2px;
   ${textAreaSpacings}
