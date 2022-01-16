@@ -14,14 +14,17 @@ body, body > #root
   width: 200px;
 }
 
-a.active  {
-  *  {
-    color: ${({ theme }) => theme.palette.primary.main};
-  }
+a, a:hover, a:visited, a:active{
+  text-decoration: none;
+  outline: none;
 }
+
 ol, ul, dl {
     margin: 0;
     padding: 0;
+}
+* {
+  box-sizing: border-box;
 }
 `
 

@@ -42,6 +42,7 @@ export const ResumeSubTitle = styled.h2`
 `
 
 export const ResumePageLeftContainer = styled.div`
+  box-sizing: border-box;
   font-size: 0.9em;
   width: 33%;
   background-color: ${({ theme }) => theme.palette.primary.main};
@@ -65,6 +66,7 @@ export const ResumePageLeftSectionsContainer = styled.div`
 
 export const ResumePageRightContainer = styled.div`
   display: flex;
+  box-sizing: border-box;
   flex: 1;
   flex-direction: column;
   padding: 5.16em 2.58em 2.58em 2.58em;

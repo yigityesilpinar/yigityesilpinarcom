@@ -25,7 +25,7 @@ export const HeaderContainer = styled.div`
         left: -7.625em;
         width: 0;
         opacity: 0;
-        transition: all .6s ease-in-out;
+        transition: all 0.6s ease-in-out;
       }
     }
     &:not(:first-child):after {
@@ -36,7 +36,7 @@ export const HeaderContainer = styled.div`
       left: 0;
       right: 0;
       width: 0;
-      transition: all .6s ease-in-out;
+      transition: all 0.6s ease-in-out;
       opacity: 0;
     }
     &.active:after {
