@@ -37,7 +37,7 @@ export const contacts: Contact[] = [
   {
     id: 'linkedin',
     iconSrc: linkedinIconSrc,
-    text: 'linkedin.com/in/yigit-yesilpinar-b031a071/',
+    text: 'linkedin.com/in/yigit-yesilpinar-b031a071',
     link: 'https://www.linkedin.com/in/yigit-yesilpinar-b031a071/'
   }
 ]

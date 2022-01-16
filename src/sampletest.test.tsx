@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { render } from '@testing-library/react'
 import renderer from 'react-test-renderer'
-import { Container } from 'src/components/Typography/styles'
+import { TypographyContainer } from 'src/components/Typography/styles'
 import theme from 'src/styles/theme'
 import { act } from 'react-dom/test-utils'
 
@@ -90,7 +90,7 @@ describe('Test patterns/examples', () => {
   })
 
   test('styled render with theme', () => {
-    renderer.create(<Container theme={theme} />).toJSON()
+    renderer.create(<TypographyContainer theme={theme} />).toJSON()
     expect.assertions(0)
   })
 

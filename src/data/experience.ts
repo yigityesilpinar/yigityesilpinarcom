@@ -14,7 +14,7 @@ export const experiences: Experience[] = [
   {
     id: 'storecast-fe',
     title: 'Fronted Web Developer at Storecast GmbH',
-    description: 'September 2019 - May 2021',
+    description: 'September 2019 - June 2021',
     sub: 'Full-time, Berlin, Germany'
   },
   {

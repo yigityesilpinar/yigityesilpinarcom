@@ -9,7 +9,7 @@ export const educations: Education[] = [
   {
     id: 'ankara-university',
     title: 'Computer Engineering at Ankara University',
-    description: '2019 - 2015',
+    description: '2009 - 2015',
     sub: 'Bachelor’s Degree, Ankara, Turkey'
   },
   {

@@ -60,6 +60,7 @@ export const parseJSXElement: (expression: JSXElement, rawText: string) => Parse
                   text: rawText.substring(child.start || 0, child.end || 0)
                 }
               } else {
+                // eslint-disable-next-line no-console
                 console.error('NOT COVERED CASE', { type: child.type })
                 return undefined as unknown as Parsed
               }

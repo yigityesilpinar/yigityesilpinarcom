@@ -4,10 +4,12 @@ import html2canvas from 'html2canvas'
 
 import theme from 'src/styles/theme'
 import Typography from 'src/components/Typography'
-import { contacts, educations, experiences, languageRatingsIterator, languages } from 'src/data'
+import { contacts, educations, experiences, languageRatingsIterator, languages, projects, skills } from 'src/data'
 import { HomeSectionContainer, HomeSectionRow, HeroContent } from 'src/routes/Home/styles'
 import Button from 'src/components/Button'
+import ProgressBar from 'src/components/ProgressBar'
 
+import Project from './Project'
 import resumePictureSrc from './assets/resumePicture.png'
 import downloadSrc from './assets/download.svg'
 import {
@@ -27,33 +29,72 @@ import {
   Cycle,
   CyclesContainer,
   LanguageTitle,
-  LanguageContianer
+  LanguageContianer,
+  ResumePageLeftSectionsContainer
 } from './styles'
 
 const Resume: React.FC<unknown> = () => {
   const [isDownloading, setIsDownloading] = useState(false)
-  const resumePageRef = useRef<HTMLDivElement>(null)
+  const resumePageOneRef = useRef<HTMLDivElement>(null)
+  const resumePageTwoRef = useRef<HTMLDivElement>(null)
+  const resumePageThreeRef = useRef<HTMLDivElement>(null)
   const handlePrint = () => {
-    if (typeof window !== 'undefined' && resumePageRef.current) {
+    if (
+      typeof window !== 'undefined' &&
+      resumePageOneRef.current &&
+      resumePageTwoRef.current &&
+      resumePageThreeRef.current
+    ) {
       setIsDownloading(true)
       const doc = new jsPDF('p', 'mm', 'a4')
       //   1 mm = 3.779528 px; 1 px = 0.264583 mm
-      html2canvas(resumePageRef.current, {
-        ignoreElements: (elem) => elem.classList.contains('react-resizable-handle')
-      }).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png')
-        const imgProps = doc.getImageProperties(imgData)
-        const pdfWidth = doc.internal.pageSize.getWidth()
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
-        doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
-        doc.textWithLink('Click to see more details online', pdfWidth - 10, 5, {
-          url: 'https://yigityesilpinar.com/resume',
-          align: 'right',
-          color: theme.palette.primary.main
+      const pageOneElem = resumePageOneRef.current
+      const pageTwoElem = resumePageTwoRef.current
+      const pageThreeElem = resumePageThreeRef.current
+      html2canvas(pageOneElem)
+        .then((pageOneCanvas) => {
+          const imgData = pageOneCanvas.toDataURL('image/png')
+          const imgProps = doc.getImageProperties(imgData)
+          const pdfWidth = doc.internal.pageSize.getWidth()
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+          doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
+          doc.setTextColor(theme.palette.primary.main)
+          doc.textWithLink('Click to see more details online', pdfWidth - 10, 7.5, {
+            url: 'https://yigityesilpinar.com/resume',
+            align: 'right',
+            color: theme.palette.primary.main
+          })
+          return Promise.resolve()
         })
-        doc.save('YigitYesilpinarResume.pdf')
-        setIsDownloading(false)
-      })
+        .then(() =>
+          html2canvas(pageTwoElem).then((pageTwoCanvas) => {
+            doc.addPage()
+            const imgData = pageTwoCanvas.toDataURL('image/png')
+            const imgProps = doc.getImageProperties(imgData)
+            const pdfWidth = doc.internal.pageSize.getWidth()
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+            doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
+            return Promise.resolve()
+          })
+        )
+        .then(() =>
+          html2canvas(pageThreeElem).then((pageThreeCanvas) => {
+            doc.addPage()
+            const imgData = pageThreeCanvas.toDataURL('image/png')
+            const imgProps = doc.getImageProperties(imgData)
+            const pdfWidth = doc.internal.pageSize.getWidth()
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+            doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
+            return Promise.resolve()
+          })
+        )
+        .then(() => {
+          doc.save('YigitYesilpinarResume.pdf')
+          setIsDownloading(false)
+        })
+        .catch(() => {
+          setIsDownloading(false)
+        })
     }
   }
   return (
@@ -71,40 +112,46 @@ const Resume: React.FC<unknown> = () => {
         <div style={{ height: '2em' }} />
         <Button isLoading={isDownloading} iconSrc={downloadSrc} onClick={() => handlePrint()} text="Download as pdf" />
       </HomeSectionContainer>
-      <ResumePageWrapper ref={resumePageRef}>
+      <ResumePageWrapper ref={resumePageOneRef}>
         <ResumePageContainer>
           <ResumePageLeftContainer>
             <ResumePicture src={resumePictureSrc} />
-            <ResumeSection>
-              <ResumeSubTitle>Contact</ResumeSubTitle>
-              <ul>
-                {contacts.map(({ id, text, iconSrc }) => (
-                  <li key={id}>
-                    <LeftContainerListItemContent>
-                      <img src={iconSrc} />
-                      <span>{text}</span>
-                    </LeftContainerListItemContent>
-                  </li>
+            <ResumePageLeftSectionsContainer>
+              <ResumeSection>
+                I care a lot about code quality, user and developer experience. I am up for challenges and interesting
+                projects. I take ownership of the projects and usually deliver more than expected.
+              </ResumeSection>
+              <ResumeSection>
+                <ResumeSubTitle>Contact</ResumeSubTitle>
+                <ul>
+                  {contacts.map(({ id, text, iconSrc, link }) => (
+                    <li key={id}>
+                      <LeftContainerListItemContent href={link} target="_blank">
+                        <img src={iconSrc} />
+                        <span>{text}</span>
+                      </LeftContainerListItemContent>
+                    </li>
+                  ))}
+                </ul>
+              </ResumeSection>
+              <ResumeSection>
+                <ResumeSubTitle>Languages</ResumeSubTitle>
+                {languages.map(({ id, rating, title }) => (
+                  <LanguageContianer key={id}>
+                    <LanguageTitle>{title}</LanguageTitle>
+                    <CyclesContainer>
+                      {languageRatingsIterator.map((i) => (
+                        <Cycle key={i} isFull={i + 1 <= rating} />
+                      ))}
+                    </CyclesContainer>
+                  </LanguageContianer>
                 ))}
-              </ul>
-            </ResumeSection>
-            <ResumeSection>
-              <ResumeSubTitle>Languages</ResumeSubTitle>
-              {languages.map(({ id, rating, title }) => (
-                <LanguageContianer key={id}>
-                  <LanguageTitle>{title}</LanguageTitle>
-                  <CyclesContainer>
-                    {languageRatingsIterator.map((i) => (
-                      <Cycle isFull={i + 1 <= rating} />
-                    ))}
-                  </CyclesContainer>
-                </LanguageContianer>
-              ))}
-            </ResumeSection>
-            <ResumeSection>
-              <ResumeSubTitle>Hobby</ResumeSubTitle>
-              <div>Playing guitar, football, basketball.</div>
-            </ResumeSection>
+              </ResumeSection>
+              <ResumeSection>
+                <ResumeSubTitle>Hobby</ResumeSubTitle>
+                <div>Playing guitar, football, basketball.</div>
+              </ResumeSection>
+            </ResumePageLeftSectionsContainer>
           </ResumePageLeftContainer>
           <ResumePageRightContainer>
             <RightTopBar />
@@ -138,6 +185,42 @@ const Resume: React.FC<unknown> = () => {
                   </li>
                 ))}
               </ul>
+            </ResumeSection>
+          </ResumePageRightContainer>
+        </ResumePageContainer>
+      </ResumePageWrapper>
+      <ResumePageWrapper ref={resumePageTwoRef}>
+        <ResumePageContainer>
+          <ResumePageLeftContainer>
+            <ResumeSection>
+              <ResumeSubTitle>Skills</ResumeSubTitle>
+              {skills.map(({ id, name, percantage }) => (
+                <div key={id} style={{ paddingBottom: '1em' }}>
+                  <div style={{ paddingBottom: '.2em' }}>{name}</div>
+                  <ProgressBar percantage={percantage} />
+                </div>
+              ))}
+            </ResumeSection>
+          </ResumePageLeftContainer>
+          <ResumePageRightContainer>
+            <ResumeSection>
+              <ResumeSubTitle>Projects</ResumeSubTitle>
+              {projects.slice(0, 3).map((project) => (
+                <Project key={project.id} project={project} />
+              ))}
+            </ResumeSection>
+          </ResumePageRightContainer>
+        </ResumePageContainer>
+      </ResumePageWrapper>
+      <ResumePageWrapper ref={resumePageThreeRef}>
+        <ResumePageContainer>
+          <ResumePageLeftContainer />
+          <ResumePageRightContainer>
+            <ResumeSection>
+              <ResumeSubTitle>Projects</ResumeSubTitle>
+              {projects.slice(3).map((project) => (
+                <Project key={project.id} project={project} />
+              ))}
             </ResumeSection>
           </ResumePageRightContainer>
         </ResumePageContainer>

@@ -8,7 +8,7 @@ export const ResumePageWrapper = styled.div`
   box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
   padding-top: 84.87%;
   margin: 10em auto;
-  // 11pt relative to 210mm a4 width and 60% ResumePageWrapper width
+  /* 11pt relative to 210mm a4 width and 60% ResumePageWrapper width */
   font-size: 1.1082vw;
   line-height: 1.4;
 `
@@ -42,18 +42,27 @@ export const ResumeSubTitle = styled.h2`
 `
 
 export const ResumePageLeftContainer = styled.div`
+  font-size: 0.9em;
   width: 33%;
   background-color: ${({ theme }) => theme.palette.primary.main};
   color: ${({ theme }) => theme.palette.primary.contrastText};
   display: flex;
   flex-direction: column;
-  padding: 5.16em 2.58em 2.58em 2.58em;
+  padding: 6em 2.58em 2.58em 2.58em;
   position: relative;
   ${ResumeSubTitle} {
     color: ${({ theme }) => theme.palette.primary.contrastText};
     padding-bottom: 0.7em;
   }
 `
+
+export const ResumePageLeftSectionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-evenly;
+`
+
 export const ResumePageRightContainer = styled.div`
   display: flex;
   flex: 1;
@@ -67,6 +76,7 @@ export const ResumePageRightContainer = styled.div`
     margin-right: 1em;
     font-size: 1.5em;
     margin-top: -0.2em;
+    height: 1.2em;
   }
 `
 
@@ -107,14 +117,30 @@ export const ExperienceListItemSub = styled.span`
   color: #bdbdbd;
 `
 
-export const LeftContainerListItemContent = styled.span`
+export const LeftContainerListItemContent = styled.a<{ href?: string }>`
   display: flex;
   width: 100%;
+  color: ${({ theme }) => theme.palette.primary.contrastText};
   img {
     height: 1.4em;
     margin-right: 0.7em;
     margin-top: 0.1em;
   }
+
+  ${({ href }) =>
+    href
+      ? css`
+          :hover {
+            opacity: 0.7;
+            color: ${({ theme }) => theme.palette.primary.contrastText};
+          }
+        `
+      : css`
+          cursor: default;
+          :hover {
+            color: ${({ theme }) => theme.palette.primary.contrastText};
+          }
+        `}
 `
 
 export const LanguageContianer = styled.div`

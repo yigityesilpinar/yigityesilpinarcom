@@ -6,7 +6,6 @@ import { Request, Response } from 'express'
 import { StaticRouter } from 'react-router'
 import { Stats } from 'webpack'
 
-import packageJSON from '../../package.json'
 import config, { PassedToClient } from '../server/config'
 import Routes from '../routes'
 import { waitAndRequireStatsFile } from './utils'
@@ -86,10 +85,6 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
         <link
           href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&display=swap"
           rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href={`https://cdnjs.cloudflare.com/ajax/libs/antd/${packageJSON.dependencies.antd}/antd.css`}
         />
         {linkTags}
       </head>

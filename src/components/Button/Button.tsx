@@ -11,7 +11,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const Button: React.FC<ButtonProps> = ({ text, isLoading, onClick, iconSrc, variant = 'primary', ...props }) => (
-  <StyledButton isLoading={isLoading} {...props} {...(isLoading ? {} : { onClick })}>
+  <StyledButton variant={variant} isLoading={isLoading} {...props} {...(isLoading ? {} : { onClick })}>
     {isLoading && <StyledLoadingIcon />}
     {iconSrc && <img src={iconSrc} />}
     <span> {text}</span>
