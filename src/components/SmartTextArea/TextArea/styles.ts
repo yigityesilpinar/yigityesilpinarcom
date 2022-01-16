@@ -14,7 +14,7 @@ export const textAreaSpacings = css`
 export const TextareaAutosize = styled(_TextareaAutosize)<{
   $hasError?: boolean
 }>`
-  font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: inherit;
   border: 1px solid ${({ theme }) => theme.palette.secondary.main};
   border-radius: 2px;
@@ -25,8 +25,7 @@ export const TextareaAutosize = styled(_TextareaAutosize)<{
   &:hover,
   &:active,
   &:focus {
-    border-color: ${({ theme, disabled }) =>
-      !disabled && theme.palette.primary.main};
+    border-color: ${({ theme, disabled }) => !disabled && theme.palette.primary.main};
     border-right-width: 1px !important;
     outline: none;
   }

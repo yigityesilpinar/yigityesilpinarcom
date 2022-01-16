@@ -81,7 +81,12 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
         <style dangerouslySetInnerHTML={{ __html: styleTags }} />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Yigit Yesilpinar Personal Page</title>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700;900&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&display=swap"
+          rel="stylesheet"
+        />
         <link
           rel="stylesheet"
           href={`https://cdnjs.cloudflare.com/ajax/libs/antd/${packageJSON.dependencies.antd}/antd.css`}

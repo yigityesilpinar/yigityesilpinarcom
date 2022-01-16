@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import defaultTheme from 'src/styles/theme'
 
@@ -13,6 +13,7 @@ const AppRoutes: React.FC<unknown> = () => (
         {appRoutes.map((routeProps, index) => (
           <Route key={index} {...routeProps} />
         ))}
+        <Redirect to="/" />
       </Switch>
     </Layout>
   </ThemeProvider>

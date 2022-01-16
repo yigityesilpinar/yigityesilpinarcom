@@ -17,25 +17,31 @@ const routes: RouteConfig[] = [
     exact: true,
     component: loadable(() => import('src/routes/Contact')),
     displayName: 'Contact',
-    navlinkPosition: 1,
+    navlinkPosition: 1
   },
   {
     path: '/develop',
     component: loadable(() => import('src/routes/Develop')),
     exact: true,
-    displayName: 'Develop',
+    displayName: 'Develop'
+  },
+  {
+    path: '/resume',
+    component: loadable(() => import('src/routes/Resume')),
+    exact: true,
+    displayName: 'Resume'
   },
   {
     path: '/',
     component: loadable(() => import('src/routes/Home')),
     exact: true,
     displayName: 'Home',
-    navlinkPosition: 0,
-  },
+    navlinkPosition: 0
+  }
 ]
 
-export const navLinks = (routes.filter(
-  (r) => typeof r.navlinkPosition === 'number' && r.navlinkPosition >= 0
-) as LinkConfig[]).sort((a, b) => a.navlinkPosition - b.navlinkPosition)
+export const navLinks = (
+  routes.filter((r) => typeof r.navlinkPosition === 'number' && r.navlinkPosition >= 0) as LinkConfig[]
+).sort((a, b) => a.navlinkPosition - b.navlinkPosition)
 
 export default routes

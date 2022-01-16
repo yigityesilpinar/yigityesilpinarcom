@@ -1,9 +1,9 @@
 import { lighten, darken } from 'polished'
 
-const basePrimary = '#03D684'
+const basePrimary = '#1e3446'
 const baseSecondary = '#5f6368'
 const baseError = 'red' // TODO:
-const baseText = '#231f20'
+const baseText = '#212121'
 
 const defaultTheme = {
   palette: {

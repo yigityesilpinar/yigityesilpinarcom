@@ -39,6 +39,45 @@ const clientConfig: Configuration = {
       {
         test: /\.html$/,
         use: [{ loader: 'html-loader' }]
+      },
+      // Images
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'media/[name].[ext]'
+            }
+          }
+        ]
+      },
+      // Fonts
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              mimetype: 'application/font-woff',
+              name: 'media/[name].[ext]'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              limit: 8192,
+              name: 'media/[name].[ext]'
+            }
+          }
+        ]
       }
     ]
   },
@@ -71,7 +110,7 @@ const clientConfig: Configuration = {
     }),
     ...(isDevelopment ? [] : [new CompressionPlugin()]),
     ...(isDevelopment ? [] : [new BrotliPlugin() as unknown as WebpackPluginInstance]),
-    new LoadablePlugin({ writeToDisk: true }) as unknown as WebpackPluginInstance,
+    new LoadablePlugin({ writeToDisk: true }) as unknown as WebpackPluginInstance
   ],
   optimization: {
     splitChunks: {
