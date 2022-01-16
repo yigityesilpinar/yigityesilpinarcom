@@ -51,7 +51,9 @@ const Resume: React.FC<unknown> = () => {
       const pageOneElem = resumePageOneRef.current
       const pageTwoElem = resumePageTwoRef.current
       const pageThreeElem = resumePageThreeRef.current
-      html2canvas(pageOneElem)
+      html2canvas(pageOneElem, {
+        backgroundColor: '#ffffff'
+      })
         .then((pageOneCanvas) => {
           const imgData = pageOneCanvas.toDataURL('image/png')
           const imgProps = doc.getImageProperties(imgData)
@@ -67,7 +69,9 @@ const Resume: React.FC<unknown> = () => {
           return Promise.resolve()
         })
         .then(() =>
-          html2canvas(pageTwoElem).then((pageTwoCanvas) => {
+          html2canvas(pageTwoElem, {
+            backgroundColor: '#ffffff'
+          }).then((pageTwoCanvas) => {
             doc.addPage()
             const imgData = pageTwoCanvas.toDataURL('image/png')
             const imgProps = doc.getImageProperties(imgData)
@@ -78,7 +82,9 @@ const Resume: React.FC<unknown> = () => {
           })
         )
         .then(() =>
-          html2canvas(pageThreeElem).then((pageThreeCanvas) => {
+          html2canvas(pageThreeElem, {
+            backgroundColor: '#ffffff'
+          }).then((pageThreeCanvas) => {
             doc.addPage()
             const imgData = pageThreeCanvas.toDataURL('image/png')
             const imgProps = doc.getImageProperties(imgData)

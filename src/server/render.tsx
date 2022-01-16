@@ -86,6 +86,22 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
           href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&display=swap"
           rel="stylesheet"
         />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+          @keyframes loadingCircle {
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+          @-webkit-keyframes loadingCircle {
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        `
+          }}
+        />
         {linkTags}
       </head>
       <body>
