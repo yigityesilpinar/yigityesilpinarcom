@@ -51,9 +51,12 @@ const Resume: React.FC<unknown> = () => {
       const pageOneElem = resumePageOneRef.current
       const pageTwoElem = resumePageTwoRef.current
       const pageThreeElem = resumePageThreeRef.current
-      html2canvas(pageOneElem, {
+      const scale = 720 / resumePageOneRef.current.offsetWidth
+      const html2canvasOptions = {
+        scale,
         backgroundColor: '#ffffff'
-      })
+      }
+      html2canvas(pageOneElem, html2canvasOptions)
         .then((pageOneCanvas) => {
           const imgData = pageOneCanvas.toDataURL('image/png')
           const imgProps = doc.getImageProperties(imgData)
@@ -69,9 +72,7 @@ const Resume: React.FC<unknown> = () => {
           return Promise.resolve()
         })
         .then(() =>
-          html2canvas(pageTwoElem, {
-            backgroundColor: '#ffffff'
-          }).then((pageTwoCanvas) => {
+          html2canvas(pageTwoElem, html2canvasOptions).then((pageTwoCanvas) => {
             doc.addPage()
             const imgData = pageTwoCanvas.toDataURL('image/png')
             const imgProps = doc.getImageProperties(imgData)
@@ -82,9 +83,7 @@ const Resume: React.FC<unknown> = () => {
           })
         )
         .then(() =>
-          html2canvas(pageThreeElem, {
-            backgroundColor: '#ffffff'
-          }).then((pageThreeCanvas) => {
+          html2canvas(pageThreeElem, html2canvasOptions).then((pageThreeCanvas) => {
             doc.addPage()
             const imgData = pageThreeCanvas.toDataURL('image/png')
             const imgProps = doc.getImageProperties(imgData)
