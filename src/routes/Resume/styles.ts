@@ -7,7 +7,7 @@ export const ResumePageWrapper = styled.div`
   height: 0;
   box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
   padding-top: 84.87%;
-  margin: 40px auto;
+  margin: 10em auto;
   // 11pt relative to 210mm a4 width and 60% ResumePageWrapper width
   font-size: 1.1082vw;
   line-height: 1.4;

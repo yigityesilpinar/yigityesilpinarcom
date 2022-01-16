@@ -1,11 +1,15 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
 
 import theme from 'src/styles/theme'
+import Typography from 'src/components/Typography'
 import { contacts, educations, experiences, languageRatingsIterator, languages } from 'src/data'
+import { HomeSectionContainer, HomeSectionRow, HeroContent } from 'src/routes/Home/styles'
+import Button from 'src/components/Button'
 
 import resumePictureSrc from './assets/resumePicture.png'
+import downloadSrc from './assets/download.svg'
 import {
   ResumePageWrapper,
   ResumePageContainer,
@@ -26,11 +30,12 @@ import {
   LanguageContianer
 } from './styles'
 
-//
 const Resume: React.FC<unknown> = () => {
+  const [isDownloading, setIsDownloading] = useState(false)
   const resumePageRef = useRef<HTMLDivElement>(null)
   const handlePrint = () => {
     if (typeof window !== 'undefined' && resumePageRef.current) {
+      setIsDownloading(true)
       const doc = new jsPDF('p', 'mm', 'a4')
       //   1 mm = 3.779528 px; 1 px = 0.264583 mm
       html2canvas(resumePageRef.current, {
@@ -47,12 +52,25 @@ const Resume: React.FC<unknown> = () => {
           color: theme.palette.primary.main
         })
         doc.save('YigitYesilpinarResume.pdf')
+        setIsDownloading(false)
       })
     }
   }
   return (
     <>
-      <button onClick={() => handlePrint()}>test</button>
+      <HomeSectionContainer withoutVerticalPadding>
+        <HomeSectionRow>
+          <HeroContent>
+            <Typography variant="h1">My resume</Typography>
+            <Typography variant="h3">created in html and ready to export to pdf</Typography>
+            <Typography>
+              This way I can keep my CV updated and have the pdf ready whenever someone asks for it.
+            </Typography>
+          </HeroContent>
+        </HomeSectionRow>
+        <div style={{ height: '2em' }} />
+        <Button isLoading={isDownloading} iconSrc={downloadSrc} onClick={() => handlePrint()} text="Download as pdf" />
+      </HomeSectionContainer>
       <ResumePageWrapper ref={resumePageRef}>
         <ResumePageContainer>
           <ResumePageLeftContainer>
