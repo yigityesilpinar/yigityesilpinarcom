@@ -16,7 +16,7 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
   // styled components
   const sheet = new ServerStyleSheet()
   let appStr = ''
-  let styleTags = ''
+  let styleTags: ReactElement[] = []
   let scriptTags: ReactElement[] = []
   let linkTags: ReactElement[] = []
 
@@ -36,6 +36,7 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
         </StaticRouter>
       )
     )
+
     // Render your application
     appStr = renderToString(jsx)
 
@@ -45,7 +46,7 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
     // You can also collect your "preload/prefetch" links
     linkTags = extractor.getLinkElements()
     // And you can even collect your style tags (if you use "mini-css-extract-plugin")
-    styleTags = sheet.getStyleTags()
+    styleTags = await sheet.getStyleElement()
   } catch (error) {
     // handle error
     // sentry
@@ -77,7 +78,6 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
     <html>
       <head>
         <meta charSet="UTF-8" />
-        <style dangerouslySetInnerHTML={{ __html: styleTags }} />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Yigit Yesilpinar Personal Page</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -88,20 +88,19 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
         />
         <style
           dangerouslySetInnerHTML={{
-            __html: `
-          @keyframes loadingCircle {
-            100% {
-              transform: rotate(360deg);
-            }
-          }
-          @-webkit-keyframes loadingCircle {
-            100% {
-              transform: rotate(360deg);
-            }
-          }
-        `
+            __html: `@keyframes loadingCircle {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loadingCircle {
+  100% {
+    transform: rotate(360deg);
+  }
+}`
           }}
         />
+        {styleTags}
         {linkTags}
       </head>
       <body>

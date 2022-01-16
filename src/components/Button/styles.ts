@@ -7,6 +7,7 @@ export const StyledButton = styled.button<Omit<ButtonProps, 'iconSrc' | 'text'>>
   display: flex;
   align-items: center;
   position: relative;
+  font-size: 1em;
   background-color: ${({ theme }) => theme.palette.primary.main};
   color: ${({ theme }) => theme.palette.primary.contrastText};
   border: 1px solid ${({ theme }) => theme.palette.primary.main};
