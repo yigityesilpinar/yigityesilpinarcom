@@ -28,8 +28,8 @@ const Home: React.FC = () => (
         <AboutMeContent>
           <Typography variant="h2">About me</Typography>
           <Typography>
-            I was born in Denizli, Turkey. I gained experience in companies in different coutries: Turkey, Spain, Poland
-            and currenlty in Germany. I enjoy differences and learning new things.
+            I was born in Denizli, Turkey. I gained experience in companies in different countries: Turkey, Spain,
+            Poland and currently in Germany. I enjoy learning more about different cultures and new things.
           </Typography>
           <Typography>
             Personally, I like playing guitar, spending time with family and friends. I can talk about programming,
