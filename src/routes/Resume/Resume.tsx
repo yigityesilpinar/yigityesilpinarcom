@@ -65,7 +65,7 @@ const Resume: React.FC<unknown> = () => {
           doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
           doc.setTextColor(theme.palette.primary.main)
           doc.textWithLink('Click to see more details online', pdfWidth - 10, 7.5, {
-            url: 'www.yigityesilpinar.com/resume',
+            url: 'http://www.yigityesilpinar.com/resume',
             align: 'right',
             color: theme.palette.primary.main
           })
