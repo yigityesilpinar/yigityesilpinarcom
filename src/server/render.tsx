@@ -7,6 +7,7 @@ import { StaticRouter } from 'react-router'
 import { Stats } from 'webpack'
 
 import config, { PassedToClient } from '../server/config'
+import packageJSON from '../../package.json'
 import Routes from '../routes'
 import { waitAndRequireStatsFile } from './utils'
 
@@ -79,6 +80,7 @@ const render = (stats: Stats) => async (req: Request, res: Response) => {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content={packageJSON.description} />
         <title>Yigit Yesilpinar Personal Page</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />

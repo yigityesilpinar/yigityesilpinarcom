@@ -37,13 +37,13 @@ const Project: React.FC<ProjectProps> = ({ project }) => (
     <div>
       {project.sourceLink && (
         <ProjectContainerLink rel="noreferrer" href={project.sourceLink} target="_blank">
-          <img src={githubIconSrc} />
+          <img alt="Project github link" src={githubIconSrc} />
           <span>{project.sourceLink.replace(/https?:\/\//, '')}</span>
         </ProjectContainerLink>
       )}
       {project.webLink && (
         <ProjectContainerLink rel="noreferrer" href={project.webLink} target="_blank">
-          <img src={languageIconSrc} />
+          <img alt="Project link" src={languageIconSrc} />
           <span>{project.webLink.replace(/https?:\/\//, '')}</span>
         </ProjectContainerLink>
       )}

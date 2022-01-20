@@ -1,8 +1,8 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import defaultTheme from 'src/styles/theme'
 
+import defaultTheme from 'src/styles/theme'
 import Layout from 'src/layouts/Default'
 import appRoutes from 'src/routes/config'
 

@@ -16,7 +16,7 @@ const Footer = () => (
     <FooterLinksContainer>
       {filteredContacts.map(({ id, link, iconSrc }) => (
         <FooterLink rel="noreferrer" key={id} href={link} target="_blank">
-          <img src={iconSrc} />
+          <img src={iconSrc} alt={`Yigit Yesilpinar - ${id}`} />
         </FooterLink>
       ))}
     </FooterLinksContainer>

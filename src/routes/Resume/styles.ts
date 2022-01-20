@@ -82,7 +82,7 @@ export const ResumePageRightContainer = styled.div`
   }
 `
 
-export const ResumePicture = styled.img`
+export const ResumeImg = styled.img`
   margin: 0 auto;
   width: 7.73em;
   height: 7.73em;

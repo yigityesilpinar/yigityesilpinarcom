@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
+import { Helmet } from 'react-helmet'
 
 import theme from 'src/styles/theme'
 import Typography from 'src/components/Typography'
@@ -10,14 +11,14 @@ import Button from 'src/components/Button'
 import ProgressBar from 'src/components/ProgressBar'
 
 import Project from './Project'
-import resumePictureSrc from './assets/resumePicture.png'
+import ResumeImgSrc from './assets/resumeImg.png'
 import downloadSrc from './assets/download.svg'
 import {
   ResumePageWrapper,
   ResumePageContainer,
   ResumePageLeftContainer,
   ResumePageRightContainer,
-  ResumePicture,
+  ResumeImg,
   ResumeTitle,
   ResumeSubTitle,
   RightTopBar,
@@ -104,6 +105,9 @@ const Resume: React.FC<unknown> = () => {
   }
   return (
     <>
+      <Helmet>
+        <link rel="canonical" href="https://yigityesilpinar.com/resume" />
+      </Helmet>
       <HomeSectionContainer withoutVerticalPadding>
         <HomeSectionRow>
           <HeroContent>
@@ -120,7 +124,7 @@ const Resume: React.FC<unknown> = () => {
       <ResumePageWrapper ref={resumePageOneRef}>
         <ResumePageContainer>
           <ResumePageLeftContainer>
-            <ResumePicture src={resumePictureSrc} />
+            <ResumeImg src={ResumeImgSrc} alt="Yigit Yesilpinar" />
             <ResumePageLeftSectionsContainer>
               <ResumeSection>
                 I care a lot about code quality, user and developer experience. I am up for challenges and interesting
@@ -142,7 +146,7 @@ const Resume: React.FC<unknown> = () => {
                               as: 'span'
                             })}
                       >
-                        <img src={iconSrc} />
+                        <img alt={id} src={iconSrc} />
                         <span>{text}</span>
                       </LeftContainerListItemContentLink>
                     </li>

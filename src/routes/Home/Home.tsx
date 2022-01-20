@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 
 import Typography from 'src/components/Typography'
 
@@ -8,6 +9,9 @@ import { HomeSectionContainer, HomeSectionRow, HeroContent, HeroImg, AboutMeImg,
 
 const Home: React.FC = () => (
   <>
+    <Helmet>
+      <link rel="canonical" href="https://yigityesilpinar.com" />
+    </Helmet>
     <HomeSectionContainer withoutVerticalPadding>
       <HomeSectionRow>
         <HeroContent>
@@ -19,12 +23,12 @@ const Home: React.FC = () => (
             interesting projects where I might help.
           </Typography>
         </HeroContent>
-        <HeroImg src={heroImgSrc} />
+        <HeroImg alt="Hero image" src={heroImgSrc} />
       </HomeSectionRow>
     </HomeSectionContainer>
     <HomeSectionContainer>
       <HomeSectionRow center>
-        <AboutMeImg src={aboutMe} />
+        <AboutMeImg alt="About Yigit Yesilpinar" src={aboutMe} />
         <AboutMeContent>
           <Typography variant="h2">About me</Typography>
           <Typography>
