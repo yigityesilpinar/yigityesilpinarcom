@@ -25,7 +25,7 @@ import {
   ExperienceListItemContent,
   ExperienceListItemTitle,
   ExperienceListItemSub,
-  LeftContainerListItemContent,
+  LeftContainerListItemContentLink,
   Cycle,
   CyclesContainer,
   LanguageTitle,
@@ -131,10 +131,20 @@ const Resume: React.FC<unknown> = () => {
                 <ul>
                   {contacts.map(({ id, text, iconSrc, link }) => (
                     <li key={id}>
-                      <LeftContainerListItemContent href={link} target="_blank">
+                      <LeftContainerListItemContentLink
+                        {...(link
+                          ? {
+                              rel: 'noreferrer',
+                              href: link,
+                              target: '_blank'
+                            }
+                          : {
+                              as: 'span'
+                            })}
+                      >
                         <img src={iconSrc} />
                         <span>{text}</span>
-                      </LeftContainerListItemContent>
+                      </LeftContainerListItemContentLink>
                     </li>
                   ))}
                 </ul>

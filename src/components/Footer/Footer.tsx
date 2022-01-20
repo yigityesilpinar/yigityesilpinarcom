@@ -15,7 +15,7 @@ const Footer = () => (
     <Typography contrast> Copyright © {currentYear} yigityesilpinar.com - All rights reserved.</Typography>
     <FooterLinksContainer>
       {filteredContacts.map(({ id, link, iconSrc }) => (
-        <FooterLink key={id} href={link} target="_blank">
+        <FooterLink rel="noreferrer" key={id} href={link} target="_blank">
           <img src={iconSrc} />
         </FooterLink>
       ))}

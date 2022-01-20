@@ -2,7 +2,7 @@ import React from 'react'
 import { projects } from 'src/data'
 
 import { ExperienceListItemSub, ExperienceListItemTitle } from '../styles'
-import { ProjectItem, ProjectLinkContainer } from './styles'
+import { ProjectItem, ProjectContainerLink } from './styles'
 
 import githubIconSrc from 'src/data/assets/github_black.svg'
 import languageIconSrc from 'src/data/assets/language_black.svg'
@@ -36,16 +36,16 @@ const Project: React.FC<ProjectProps> = ({ project }) => (
     </div>
     <div>
       {project.sourceLink && (
-        <ProjectLinkContainer href={project.sourceLink} target="_blank">
+        <ProjectContainerLink rel="noreferrer" href={project.sourceLink} target="_blank">
           <img src={githubIconSrc} />
           <span>{project.sourceLink.replace(/https?:\/\//, '')}</span>
-        </ProjectLinkContainer>
+        </ProjectContainerLink>
       )}
       {project.webLink && (
-        <ProjectLinkContainer href={project.webLink} target="_blank">
+        <ProjectContainerLink rel="noreferrer" href={project.webLink} target="_blank">
           <img src={languageIconSrc} />
           <span>{project.webLink.replace(/https?:\/\//, '')}</span>
-        </ProjectLinkContainer>
+        </ProjectContainerLink>
       )}
     </div>
   </ProjectItem>

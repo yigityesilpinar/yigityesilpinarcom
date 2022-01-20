@@ -119,7 +119,7 @@ export const ExperienceListItemSub = styled.span`
   color: #bdbdbd;
 `
 
-export const LeftContainerListItemContent = styled.a<{ href?: string }>`
+export const LeftContainerListItemContentLink = styled.a<{ href?: string }>`
   display: flex;
   width: 100%;
   color: ${({ theme }) => theme.palette.primary.contrastText};

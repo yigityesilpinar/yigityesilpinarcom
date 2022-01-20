@@ -8,7 +8,7 @@ export const ProjectItem = styled.div`
   }
 `
 
-export const ProjectLinkContainer = styled.a`
+export const ProjectContainerLink = styled.a`
   display: flex;
   padding-bottom: 1em;
   color: ${({ theme }) => theme.palette.text.primary};
